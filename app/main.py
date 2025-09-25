@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi import FastAPI, HTTPException, UploadFile, File, Query
 from uuid import uuid4
 from datetime import datetime
 from threading import Thread
@@ -14,6 +14,7 @@ from .worker import simulate_run
 from .exporter import write_fd_csv_stub
 from .input_models import PlayerProjection, PlayerOwnership
 from .data_storage import save_projections, save_ownership, get_inputs_info
+from .pool import load_pool
 
 app = FastAPI(title="DFS Sim Optimizer")
 
@@ -117,6 +118,15 @@ def get_run(run_id: str):
     if not rec:
         raise HTTPException(status_code=404, detail="run not found")
     return rec
+
+@app.get("/runs/{run_id}/lineups")
+def get_run_lineups(run_id: str, limit: int = Query(10, ge=1, le=1000), offset: int = Query(0, ge=0)):
+    pool = load_pool(run_id)
+    if not pool:
+        raise HTTPException(status_code=404, detail="no lineup pool found for run")
+    total = len(pool)
+    end = min(offset + limit, total)
+    return {"total": total, "limit": limit, "offset": offset, "lineups": pool[offset:end]}
 
 @app.get("/exports/{run_id}/fd-stub")
 def export_fd_stub(run_id: str):

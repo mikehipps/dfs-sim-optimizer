@@ -57,3 +57,11 @@ def save_pool(run_id: str, pool: List[Dict[str, Any]]) -> Path:
     with out.open("w") as f:
         json.dump(pool, f, indent=2)
     return out
+
+def load_pool(run_id: str) -> List[Dict[str, Any]]:
+    p = RUNS_DIR / f"{run_id}_pool.json"
+    if not p.exists():
+        return []
+    import json
+    with p.open() as f:
+        return json.load(f)
