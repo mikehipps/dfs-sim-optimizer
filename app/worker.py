@@ -25,23 +25,30 @@ def simulate_run(run_id: str, n_steps: int = 12, delay_s: float = 0.05) -> None:
         n_sims      = int(rec.get("n_sims", 1000))
         field_size  = int(rec.get("field_size", max(200, target_pool * 20)))
         corr_sigma  = float(rec.get("corr_sigma", 1.5))
+        site        = str(rec.get("site", "FD")).upper()
 
         info = get_inputs_info(slate_id)
         if not info.get("has_projections") or not info.get("has_ownership"):
             update_run(run_id, status="error", message=f"missing inputs for {slate_id} (projections and ownership required)", progress=0.0)
             return
 
-        max_trials  = target_pool * 30
+        max_trials  = target_pool * 40
         seed = sum(ord(c) for c in run_id) & 0xFFFFFFFF
         rng = random.Random(seed)
 
-        # --- Build pool by contest-like sampling ---
+        # --- Build pool ---
         pool = []
         seen = set()
         trials = 0
         while len(pool) < target_pool and trials < max_trials:
             trials += 1
-            ln = sample_lineup_weighted_roster(slate_id, rng, salary_cap=salary_cap, min_stack=min_stack, avoid_hvp=avoid_hvp)
+            ln = sample_lineup_weighted_roster(
+                slate_id, rng,
+                salary_cap=salary_cap,
+                min_stack=min_stack,
+                avoid_hvp=avoid_hvp,
+                site=site,
+            )
             sig = _dedupe_key(ln)
             if sig in seen:
                 continue
@@ -53,15 +60,15 @@ def simulate_run(run_id: str, n_steps: int = 12, delay_s: float = 0.05) -> None:
         save_pool(run_id, pool)
         update_run(run_id, progress=0.5, message="pool saved")
 
-        # --- Simple metrics ---
+        # --- Metrics ---
         summary = summarize_pool(pool)
         save_metrics(run_id, summary)
         update_run(run_id, progress=0.65, message="metrics computed")
 
-        # --- Outcome sims (uses your controls) ---
+        # --- Outcome sims ---
         simstats = simulate_pool_outcomes(
             pool,
-            n_sims=max(50, min(n_sims, 5000)),              # safety clamp
+            n_sims=max(50, min(n_sims, 5000)),
             field_size=max(100, field_size),
             corr_sigma=float(corr_sigma),
             seed=seed,

@@ -1,0 +1,407 @@
+{
+  "n_sims": 1000,
+  "field_size": 1000,
+  "corr_sigma": 1.5,
+  "lineups": [
+    {
+      "lineup_id": "L001",
+      "mean": 91.193,
+      "stdev": 10.362,
+      "top50_rate": 0.434,
+      "top10_rate": 0.072,
+      "top1_rate": 0.01
+    },
+    {
+      "lineup_id": "L002",
+      "mean": 91.89,
+      "stdev": 11.147,
+      "top50_rate": 0.47,
+      "top10_rate": 0.08,
+      "top1_rate": 0.011
+    },
+    {
+      "lineup_id": "L003",
+      "mean": 94.718,
+      "stdev": 10.771,
+      "top50_rate": 0.557,
+      "top10_rate": 0.139,
+      "top1_rate": 0.032
+    },
+    {
+      "lineup_id": "L004",
+      "mean": 90.876,
+      "stdev": 11.259,
+      "top50_rate": 0.403,
+      "top10_rate": 0.072,
+      "top1_rate": 0.012
+    },
+    {
+      "lineup_id": "L005",
+      "mean": 96.953,
+      "stdev": 10.79,
+      "top50_rate": 0.66,
+      "top10_rate": 0.188,
+      "top1_rate": 0.029
+    },
+    {
+      "lineup_id": "L006",
+      "mean": 93.673,
+      "stdev": 11.062,
+      "top50_rate": 0.522,
+      "top10_rate": 0.107,
+      "top1_rate": 0.012
+    },
+    {
+      "lineup_id": "L007",
+      "mean": 97.448,
+      "stdev": 10.982,
+      "top50_rate": 0.657,
+      "top10_rate": 0.201,
+      "top1_rate": 0.053
+    },
+    {
+      "lineup_id": "L008",
+      "mean": 89.697,
+      "stdev": 10.352,
+      "top50_rate": 0.368,
+      "top10_rate": 0.05,
+      "top1_rate": 0.006
+    },
+    {
+      "lineup_id": "L009",
+      "mean": 94.762,
+      "stdev": 11.199,
+      "top50_rate": 0.564,
+      "top10_rate": 0.135,
+      "top1_rate": 0.024
+    },
+    {
+      "lineup_id": "L010",
+      "mean": 90.446,
+      "stdev": 10.361,
+      "top50_rate": 0.399,
+      "top10_rate": 0.064,
+      "top1_rate": 0.007
+    },
+    {
+      "lineup_id": "L011",
+      "mean": 91.95,
+      "stdev": 10.333,
+      "top50_rate": 0.465,
+      "top10_rate": 0.065,
+      "top1_rate": 0.012
+    },
+    {
+      "lineup_id": "L012",
+      "mean": 90.161,
+      "stdev": 11.325,
+      "top50_rate": 0.393,
+      "top10_rate": 0.053,
+      "top1_rate": 0.008
+    },
+    {
+      "lineup_id": "L013",
+      "mean": 93.233,
+      "stdev": 10.523,
+      "top50_rate": 0.504,
+      "top10_rate": 0.089,
+      "top1_rate": 0.018
+    },
+    {
+      "lineup_id": "L014",
+      "mean": 87.438,
+      "stdev": 9.986,
+      "top50_rate": 0.267,
+      "top10_rate": 0.023,
+      "top1_rate": 0.001
+    },
+    {
+      "lineup_id": "L015",
+      "mean": 94.935,
+      "stdev": 11.061,
+      "top50_rate": 0.581,
+      "top10_rate": 0.14,
+      "top1_rate": 0.027
+    },
+    {
+      "lineup_id": "L016",
+      "mean": 93.938,
+      "stdev": 11.022,
+      "top50_rate": 0.516,
+      "top10_rate": 0.124,
+      "top1_rate": 0.024
+    },
+    {
+      "lineup_id": "L017",
+      "mean": 94.423,
+      "stdev": 10.0,
+      "top50_rate": 0.548,
+      "top10_rate": 0.112,
+      "top1_rate": 0.014
+    },
+    {
+      "lineup_id": "L018",
+      "mean": 96.139,
+      "stdev": 11.152,
+      "top50_rate": 0.613,
+      "top10_rate": 0.164,
+      "top1_rate": 0.027
+    },
+    {
+      "lineup_id": "L019",
+      "mean": 94.768,
+      "stdev": 11.247,
+      "top50_rate": 0.573,
+      "top10_rate": 0.133,
+      "top1_rate": 0.019
+    },
+    {
+      "lineup_id": "L020",
+      "mean": 91.469,
+      "stdev": 10.627,
+      "top50_rate": 0.447,
+      "top10_rate": 0.064,
+      "top1_rate": 0.007
+    },
+    {
+      "lineup_id": "L021",
+      "mean": 94.06,
+      "stdev": 10.961,
+      "top50_rate": 0.528,
+      "top10_rate": 0.115,
+      "top1_rate": 0.025
+    },
+    {
+      "lineup_id": "L022",
+      "mean": 93.942,
+      "stdev": 10.946,
+      "top50_rate": 0.543,
+      "top10_rate": 0.121,
+      "top1_rate": 0.025
+    },
+    {
+      "lineup_id": "L023",
+      "mean": 94.291,
+      "stdev": 10.841,
+      "top50_rate": 0.568,
+      "top10_rate": 0.12,
+      "top1_rate": 0.024
+    },
+    {
+      "lineup_id": "L024",
+      "mean": 93.754,
+      "stdev": 10.476,
+      "top50_rate": 0.544,
+      "top10_rate": 0.113,
+      "top1_rate": 0.02
+    },
+    {
+      "lineup_id": "L025",
+      "mean": 91.552,
+      "stdev": 10.798,
+      "top50_rate": 0.45,
+      "top10_rate": 0.084,
+      "top1_rate": 0.019
+    },
+    {
+      "lineup_id": "L026",
+      "mean": 93.286,
+      "stdev": 9.988,
+      "top50_rate": 0.515,
+      "top10_rate": 0.092,
+      "top1_rate": 0.018
+    },
+    {
+      "lineup_id": "L027",
+      "mean": 97.486,
+      "stdev": 10.891,
+      "top50_rate": 0.672,
+      "top10_rate": 0.195,
+      "top1_rate": 0.046
+    },
+    {
+      "lineup_id": "L028",
+      "mean": 94.792,
+      "stdev": 10.847,
+      "top50_rate": 0.569,
+      "top10_rate": 0.13,
+      "top1_rate": 0.02
+    },
+    {
+      "lineup_id": "L029",
+      "mean": 94.402,
+      "stdev": 11.273,
+      "top50_rate": 0.542,
+      "top10_rate": 0.133,
+      "top1_rate": 0.023
+    },
+    {
+      "lineup_id": "L030",
+      "mean": 95.206,
+      "stdev": 10.956,
+      "top50_rate": 0.581,
+      "top10_rate": 0.145,
+      "top1_rate": 0.032
+    },
+    {
+      "lineup_id": "L031",
+      "mean": 97.923,
+      "stdev": 11.746,
+      "top50_rate": 0.669,
+      "top10_rate": 0.237,
+      "top1_rate": 0.059
+    },
+    {
+      "lineup_id": "L032",
+      "mean": 95.268,
+      "stdev": 10.352,
+      "top50_rate": 0.596,
+      "top10_rate": 0.142,
+      "top1_rate": 0.018
+    },
+    {
+      "lineup_id": "L033",
+      "mean": 92.268,
+      "stdev": 10.293,
+      "top50_rate": 0.466,
+      "top10_rate": 0.09,
+      "top1_rate": 0.012
+    },
+    {
+      "lineup_id": "L034",
+      "mean": 91.08,
+      "stdev": 10.304,
+      "top50_rate": 0.423,
+      "top10_rate": 0.066,
+      "top1_rate": 0.01
+    },
+    {
+      "lineup_id": "L035",
+      "mean": 90.544,
+      "stdev": 11.182,
+      "top50_rate": 0.373,
+      "top10_rate": 0.074,
+      "top1_rate": 0.014
+    },
+    {
+      "lineup_id": "L036",
+      "mean": 93.01,
+      "stdev": 11.169,
+      "top50_rate": 0.499,
+      "top10_rate": 0.095,
+      "top1_rate": 0.018
+    },
+    {
+      "lineup_id": "L037",
+      "mean": 91.784,
+      "stdev": 10.635,
+      "top50_rate": 0.453,
+      "top10_rate": 0.076,
+      "top1_rate": 0.006
+    },
+    {
+      "lineup_id": "L038",
+      "mean": 94.921,
+      "stdev": 11.274,
+      "top50_rate": 0.571,
+      "top10_rate": 0.146,
+      "top1_rate": 0.029
+    },
+    {
+      "lineup_id": "L039",
+      "mean": 93.545,
+      "stdev": 10.86,
+      "top50_rate": 0.519,
+      "top10_rate": 0.109,
+      "top1_rate": 0.023
+    },
+    {
+      "lineup_id": "L040",
+      "mean": 93.792,
+      "stdev": 10.663,
+      "top50_rate": 0.526,
+      "top10_rate": 0.106,
+      "top1_rate": 0.016
+    },
+    {
+      "lineup_id": "L041",
+      "mean": 91.584,
+      "stdev": 10.35,
+      "top50_rate": 0.452,
+      "top10_rate": 0.074,
+      "top1_rate": 0.015
+    },
+    {
+      "lineup_id": "L042",
+      "mean": 94.471,
+      "stdev": 10.485,
+      "top50_rate": 0.556,
+      "top10_rate": 0.115,
+      "top1_rate": 0.017
+    },
+    {
+      "lineup_id": "L043",
+      "mean": 92.86,
+      "stdev": 11.092,
+      "top50_rate": 0.521,
+      "top10_rate": 0.105,
+      "top1_rate": 0.018
+    },
+    {
+      "lineup_id": "L044",
+      "mean": 96.327,
+      "stdev": 11.005,
+      "top50_rate": 0.613,
+      "top10_rate": 0.174,
+      "top1_rate": 0.035
+    },
+    {
+      "lineup_id": "L045",
+      "mean": 90.16,
+      "stdev": 11.134,
+      "top50_rate": 0.387,
+      "top10_rate": 0.061,
+      "top1_rate": 0.007
+    },
+    {
+      "lineup_id": "L046",
+      "mean": 91.023,
+      "stdev": 10.165,
+      "top50_rate": 0.439,
+      "top10_rate": 0.064,
+      "top1_rate": 0.016
+    },
+    {
+      "lineup_id": "L047",
+      "mean": 96.494,
+      "stdev": 11.122,
+      "top50_rate": 0.628,
+      "top10_rate": 0.186,
+      "top1_rate": 0.036
+    },
+    {
+      "lineup_id": "L048",
+      "mean": 90.276,
+      "stdev": 10.829,
+      "top50_rate": 0.394,
+      "top10_rate": 0.066,
+      "top1_rate": 0.015
+    },
+    {
+      "lineup_id": "L049",
+      "mean": 92.441,
+      "stdev": 10.583,
+      "top50_rate": 0.471,
+      "top10_rate": 0.086,
+      "top1_rate": 0.015
+    },
+    {
+      "lineup_id": "L050",
+      "mean": 94.461,
+      "stdev": 11.323,
+      "top50_rate": 0.559,
+      "top10_rate": 0.129,
+      "top1_rate": 0.024
+    }
+  ]
+}

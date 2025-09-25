@@ -33,7 +33,6 @@ app.add_middleware(
 def health():
     return {"status": "ok"}
 
-# -------- inputs (JSON) --------
 @app.post("/slates/{slate_id}/projections")
 def upload_projections(slate_id: str, items: List[PlayerProjection]):
     save_projections(slate_id, [i.model_dump() for i in items])
@@ -46,7 +45,6 @@ def upload_ownership(slate_id: str, items: List[PlayerOwnership]):
     info = get_inputs_info(slate_id)
     return {"status": "saved", "info": info}
 
-# -------- inputs (CSV) --------
 @app.post("/slates/{slate_id}/projections.csv")
 async def upload_projections_csv(slate_id: str, file: UploadFile = File(...)):
     content = (await file.read()).decode("utf-8", errors="replace")
@@ -95,46 +93,41 @@ async def upload_ownership_csv(slate_id: str, file: UploadFile = File(...)):
 def slate_inputs(slate_id: str):
     return get_inputs_info(slate_id)
 
-# -------- sampler test with cap + stack --------
+# Test sampler with site/cap/stack
 @app.get("/slates/{slate_id}/sample-lineup")
 def sample_lineup(
     slate_id: str,
     seed: int = Query(42),
     salary_cap: int = Query(40000),
     min_stack: int = Query(0),
+    site: str = Query("FD"),
 ):
     rng = random.Random(seed)
     try:
         ln = sample_lineup_weighted_roster(
-            slate_id, rng, salary_cap=salary_cap, min_stack=min_stack, avoid_hvp=False
+            slate_id, rng,
+            salary_cap=salary_cap,
+            min_stack=min_stack,
+            avoid_hvp=False,
+            site=site,
         )
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
-    return {
-        "slate_id": slate_id,
-        "seed": seed,
-        "salary_cap": salary_cap,
-        "min_stack": min_stack,
-        "lineup": ln,
-    }
+    return {"slate_id": slate_id, "seed": seed, "salary_cap": salary_cap, "min_stack": min_stack, "site": site, "lineup": ln}
 
 # -------- runs --------
 @app.post("/runs")
 def start_run(req: RunRequest):
     run_id = str(uuid4())
-    record = RunRecord(
-        run_id=run_id,
-        slate_id=req.slate_id,
-        n_sims=req.n_sims,
-        created_at=datetime.utcnow(),
-    )
+    record = RunRecord(run_id=run_id, slate_id=req.slate_id, n_sims=req.n_sims, created_at=datetime.utcnow())
     rec = record.model_dump()
     rec["pool_size"]  = req.pool_size
     rec["salary_cap"] = req.salary_cap
     rec["min_stack"]  = req.min_stack
     rec["avoid_hvp"]  = req.avoid_hvp
-    rec["field_size"] = req.field_size   # NEW
-    rec["corr_sigma"] = req.corr_sigma   # NEW
+    rec["field_size"] = req.field_size
+    rec["corr_sigma"] = req.corr_sigma
+    rec["site"]       = (req.site or "FD").upper()  # NEW
     save_run(run_id, rec)
     Thread(target=simulate_run, args=(run_id,), daemon=True).start()
     return {"run_id": run_id, "status": "created"}
@@ -149,6 +142,8 @@ def get_run(run_id: str):
     if not rec:
         raise HTTPException(status_code=404, detail="run not found")
     return rec
+
+from .pool import load_pool
 
 @app.get("/runs/{run_id}/lineups")
 def get_run_lineups(run_id: str, limit: int = Query(10, ge=1, le=1000), offset: int = Query(0, ge=0)):
@@ -167,7 +162,6 @@ def get_run_metrics(run_id: str):
     with p.open() as f:
         return json.load(f)
 
-# -------- simstats --------
 @app.get("/runs/{run_id}/simstats")
 def get_run_simstats(run_id: str):
     p = RUNS_DIR / f"{run_id}_simstats.json"
@@ -176,7 +170,6 @@ def get_run_simstats(run_id: str):
     with p.open() as f:
         return json.load(f)
 
-# -------- export endpoints --------
 @app.get("/exports/{run_id}/fd-stub")
 def export_fd_stub(run_id: str, n: int = Query(10, ge=1, le=500)):
     rec = load_run(run_id)
