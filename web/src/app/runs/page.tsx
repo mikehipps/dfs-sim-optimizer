@@ -91,7 +91,7 @@ const [runId, setRunId] = useState("");
       <div className="space-y-2">
         <div className="font-medium">Recent (latest 10)</div>
         <ul className="list-disc ml-6">
-          {shown.map(r => (
+          {runs.map(r => (
             <li key={r.run_id}>
               <button className="underline" onClick={() => setRunId(r.run_id)} title="Click to select this run_id">
                 {r.run_id.slice(0,8)}
