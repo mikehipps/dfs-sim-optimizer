@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import RunFilters from '../../../components/RunFilters';
 const API = process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000";
 
 type RunLite = { run_id: string; slate_id: string; n_sims: number; status: string; progress: number; created_at: string };
@@ -81,7 +82,8 @@ export default function RunsPage() {
   useEffect(() => { loadRuns(); }, []);
 
   return (
-    <main className="min-h-screen p-6 space-y-6">
+      <main className="min-h-screen p-6 space-y-6">
+        <RunFilters csvName="runs_filtered.csv" />
       <h1 className="text-2xl font-bold">Runs</h1>
 
       <div className="space-y-2">
