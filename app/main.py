@@ -185,3 +185,16 @@ def export_fd_stub(run_id: str, n: int = Query(10, ge=1, le=500)):
         raise HTTPException(status_code=400, detail="run not finished yet")
     path = write_fd_csv_stub(run_id, n_lineups=n)
     return FileResponse(path, media_type="text/csv", filename=path.name)
+
+# -------- export: Top-N by Top10% rate --------
+@app.get("/exports/{run_id}/top-by-sim")
+def export_top_by_sim(run_id: str, n: int = Query(20, ge=1, le=500)):
+    rec = load_run(run_id)
+    if not rec:
+        raise HTTPException(status_code=404, detail="run not found")
+    if rec.get("status") != "done":
+        raise HTTPException(status_code=400, detail="run not finished yet")
+    # local import to avoid editing the top imports
+    from .exporter import write_top_by_sim
+    path = write_top_by_sim(run_id, n=n)
+    return FileResponse(path, media_type="text/csv", filename=path.name)
