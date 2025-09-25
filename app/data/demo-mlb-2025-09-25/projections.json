@@ -1,0 +1,18 @@
+[
+  {
+    "player_id": "p1",
+    "name": "Alice Batter",
+    "team": "NYM",
+    "position": "1B",
+    "salary": 3200,
+    "proj": 9.4
+  },
+  {
+    "player_id": "p2",
+    "name": "Bob Pitcher",
+    "team": "ATL",
+    "position": "P",
+    "salary": 8800,
+    "proj": 18.1
+  }
+]

@@ -4,15 +4,17 @@ from datetime import datetime
 from threading import Thread
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
+from typing import List
 
 from .models import RunRequest, RunRecord
 from .storage import save_run, load_run, list_runs
 from .worker import simulate_run
 from .exporter import write_fd_csv_stub
+from .input_models import PlayerProjection, PlayerOwnership
+from .data_storage import save_projections, save_ownership, get_inputs_info
 
 app = FastAPI(title="DFS Sim Optimizer")
 
-# allow the Next.js dev server to call this API
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
@@ -25,8 +27,27 @@ app.add_middleware(
 def health():
     return {"status": "ok"}
 
+# -------- inputs (projections & ownership) --------
+@app.post("/slates/{slate_id}/projections")
+def upload_projections(slate_id: str, items: List[PlayerProjection]):
+    save_projections(slate_id, [i.model_dump() for i in items])
+    info = get_inputs_info(slate_id)
+    return {"status": "saved", "info": info}
+
+@app.post("/slates/{slate_id}/ownership")
+def upload_ownership(slate_id: str, items: List[PlayerOwnership]):
+    save_ownership(slate_id, [i.model_dump() for i in items])
+    info = get_inputs_info(slate_id)
+    return {"status": "saved", "info": info}
+
+@app.get("/slates/{slate_id}/inputs")
+def slate_inputs(slate_id: str):
+    return get_inputs_info(slate_id)
+
+# -------- runs --------
 @app.post("/runs")
 def start_run(req: RunRequest):
+    # (optional) we can require inputs; for now just start
     run_id = str(uuid4())
     record = RunRecord(
         run_id=run_id,
