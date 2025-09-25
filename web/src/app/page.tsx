@@ -19,6 +19,11 @@ type RunRecord = {
 export default function Home() {
   const [site, setSite] = useState<"FD" | "DK">("FD");
   const [slate, setSlate] = useState("demo-mlb-2025-09-25");
+
+  // contest knobs (NEW)
+  const [contestSize, setContestSize] = useState<number>(5000);
+  const [myEntries, setMyEntries] = useState<number>(1);
+
   const [poolSize, setPoolSize] = useState<number>(50);
   const [salaryCap, setSalaryCap] = useState<number>(SITE_DEFAULT_CAP["FD"]);
   const [minStack, setMinStack] = useState<number>(0);
@@ -32,6 +37,24 @@ export default function Home() {
   const [rec, setRec] = useState<RunRecord | null>(null);
   const [busy, setBusy] = useState(false);
   const timerRef = useRef<NodeJS.Timer | null>(null);
+
+  function applyContestDefaults() {
+    const cs = Math.max(50, Math.min(100000, Number(contestSize) || 1000));
+    const me = Math.max(1, Math.min(150, Number(myEntries) || 1));
+
+    // Suggest field size = contest size
+    const suggestedField = cs;
+
+    // Suggest n_sims = clamp( min(2000, max(500, 0.5 * field)) )
+    const suggestedSims = Math.max(500, Math.min(2000, Math.round(0.5 * suggestedField)));
+
+    // Suggest pool_size = clamp( max(50, entries * 12), ≤ 1000 )
+    const suggestedPool = Math.max(50, Math.min(1000, me * 12));
+
+    setFieldSize(suggestedField);
+    setNSims(suggestedSims);
+    setPoolSize(suggestedPool);
+  }
 
   async function startRun() {
     setBusy(true);
@@ -122,31 +145,28 @@ export default function Home() {
 
         <label className="text-sm">Slate:</label>
         <input value={slate} onChange={(e) => setSlate(e.target.value)} className="border rounded px-2 py-1" />
+      </div>
 
+      {/* Contest config */}
+      <div className="flex gap-3 items-center flex-wrap">
+        <label className="text-sm">Contest size:</label>
+        <input type="number" min={50} max={100000} value={contestSize} onChange={(e) => setContestSize(Number(e.target.value))} className="border rounded px-2 py-1 w-28" />
+        <label className="text-sm">My entries:</label>
+        <input type="number" min={1} max={150} value={myEntries} onChange={(e) => setMyEntries(Number(e.target.value))} className="border rounded px-2 py-1 w-24" />
+        <button onClick={applyContestDefaults} className="px-3 py-1 rounded bg-gray-800 text-white">Apply defaults</button>
+      </div>
+
+      {/* Pool + sim knobs */}
+      <div className="flex gap-3 items-center flex-wrap">
         <label className="text-sm">Pool size:</label>
         <input type="number" min={1} max={1000} value={poolSize} onChange={(e) => setPoolSize(Number(e.target.value))} className="border rounded px-2 py-1 w-24" />
 
         <label className="text-sm">Salary cap:</label>
-        <input
-          type="number"
-          min={1000}
-          max={100000}
-          value={salaryCap}
-          onChange={(e) => setSalaryCap(Number(e.target.value))}
-          className="border rounded px-2 py-1 w-28"
-        />
+        <input type="number" min={1000} max={100000} value={salaryCap} onChange={(e) => setSalaryCap(Number(e.target.value))} className="border rounded px-2 py-1 w-28" />
 
         <label className="text-sm">Min stack:</label>
-        <input
-          type="number"
-          min={0}
-          max={8}
-          value={minStack}
-          onChange={(e) => setMinStack(Number(e.target.value))}
-          className="border rounded px-2 py-1 w-20"
-        />
+        <input type="number" min={0} max={8} value={minStack} onChange={(e) => setMinStack(Number(e.target.value))} className="border rounded px-2 py-1 w-20" />
 
-        {/* sim controls */}
         <label className="text-sm ml-2">N sims:</label>
         <input type="number" min={50} max={5000} value={nSims} onChange={(e) => setNSims(Number(e.target.value))} className="border rounded px-2 py-1 w-24" />
 
