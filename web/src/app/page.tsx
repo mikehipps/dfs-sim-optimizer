@@ -16,6 +16,7 @@ type RunRecord = {
 };
 
 export default function Home() {
+  const [slate, setSlate] = useState("demo-mlb-2025-09-25");
   const [runId, setRunId] = useState<string | null>(null);
   const [rec, setRec] = useState<RunRecord | null>(null);
   const [busy, setBusy] = useState(false);
@@ -28,7 +29,7 @@ export default function Home() {
       const r = await fetch(`${API}/runs`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slate_id: "demo-mlb-2025-09-25", n_sims: 1000 }),
+        body: JSON.stringify({ slate_id: slate, n_sims: 1000 }),
       });
       const data: RunResp = await r.json();
       setRunId(data.run_id);
@@ -67,13 +68,21 @@ export default function Home() {
     <main className="min-h-screen p-6 flex flex-col items-center gap-6">
       <h1 className="text-2xl font-bold">DFS Sim Optimizer — Minimal UI</h1>
 
-      <button
-        onClick={startRun}
-        disabled={busy}
-        className="px-4 py-2 rounded bg-blue-600 text-white disabled:opacity-50"
-      >
-        {busy ? "Running..." : "Start Demo Run"}
-      </button>
+      <div className="flex gap-2 items-center">
+        <label className="text-sm">Slate:</label>
+        <input
+          value={slate}
+          onChange={(e) => setSlate(e.target.value)}
+          className="border rounded px-2 py-1"
+        />
+        <button
+          onClick={startRun}
+          disabled={busy}
+          className="px-4 py-2 rounded bg-blue-600 text-white disabled:opacity-50"
+        >
+          {busy ? "Running..." : "Start Run"}
+        </button>
+      </div>
 
       {rec && (
         <div className="w-full max-w-xl space-y-2">

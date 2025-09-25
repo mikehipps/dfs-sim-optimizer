@@ -1,0 +1,9 @@
+{
+  "run_id": "9fdfab05-7a37-4bcc-a21d-e82c4c85eb87",
+  "slate_id": "missing-slate",
+  "n_sims": 1000,
+  "created_at": "2025-09-25 14:47:11.540259",
+  "status": "error",
+  "progress": 0.0,
+  "message": "missing inputs for missing-slate (projections and ownership required)"
+}
