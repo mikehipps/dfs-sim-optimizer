@@ -1,10 +1,12 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, UploadFile, File
 from uuid import uuid4
 from datetime import datetime
 from threading import Thread
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
+import csv
+from io import StringIO
 
 from .models import RunRequest, RunRecord
 from .storage import save_run, load_run, list_runs
@@ -27,7 +29,7 @@ app.add_middleware(
 def health():
     return {"status": "ok"}
 
-# -------- inputs (projections & ownership) --------
+# -------- inputs (JSON) --------
 @app.post("/slates/{slate_id}/projections")
 def upload_projections(slate_id: str, items: List[PlayerProjection]):
     save_projections(slate_id, [i.model_dump() for i in items])
@@ -40,6 +42,37 @@ def upload_ownership(slate_id: str, items: List[PlayerOwnership]):
     info = get_inputs_info(slate_id)
     return {"status": "saved", "info": info}
 
+# -------- inputs (CSV) --------
+@app.post("/slates/{slate_id}/projections.csv")
+async def upload_projections_csv(slate_id: str, file: UploadFile = File(...)):
+    # Expect header: player_id,name,team,position,salary,proj
+    content = (await file.read()).decode("utf-8", errors="replace")
+    reader = csv.DictReader(StringIO(content))
+    required = {"player_id", "name", "team", "position", "salary", "proj"}
+    if set(reader.fieldnames or []) < required:
+        raise HTTPException(
+            status_code=400,
+            detail=f"CSV must include columns: {', '.join(sorted(required))}",
+        )
+
+    items = []
+    for row in reader:
+        try:
+            items.append({
+                "player_id": row["player_id"],
+                "name": row["name"],
+                "team": row["team"],
+                "position": row["position"],
+                "salary": int(row["salary"]),
+                "proj": float(row["proj"]),
+            })
+        except Exception:
+            raise HTTPException(status_code=400, detail=f"Bad row: {row}")
+
+    save_projections(slate_id, items)
+    info = get_inputs_info(slate_id)
+    return {"status": "saved", "rows": len(items), "info": info}
+
 @app.get("/slates/{slate_id}/inputs")
 def slate_inputs(slate_id: str):
     return get_inputs_info(slate_id)
@@ -47,7 +80,6 @@ def slate_inputs(slate_id: str):
 # -------- runs --------
 @app.post("/runs")
 def start_run(req: RunRequest):
-    # (optional) we can require inputs; for now just start
     run_id = str(uuid4())
     record = RunRecord(
         run_id=run_id,
