@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from 'react';
-
 import RunFilters from '../../../components/RunFilters';
+
 const API = process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000";
 
 type RunLite = { run_id: string; slate_id: string; n_sims: number; status: string; progress: number; created_at: string };
@@ -21,11 +21,11 @@ type SimstatsResp = {
 };
 
 export default function RunsPage() {
+  const [runs, setRuns] = useState<RunLite[]>([]);
   const [filtered, setFiltered] = useState<any[] | null>(null);
-const [runs, setRuns] = useState<RunLite[]>([]);
+  const shown = useMemo(() => filtered ?? runs, [filtered, runs]);
   const [runId, setRunId] = useState("");
-  const [lineups, setL  const shown = useMemo(() => filtered ?? runs, [filtered, runs]);
-ineups] = useState<Lineup[]>([]);
+  const [lineups, setLineups] = useState<Lineup[]>([]);
   const [metrics, setMetrics] = useState<MetricsResp | null>(null);
   const [simstats, setSimstats] = useState<SimstatsResp | null>(null);
   const [exportN, setExportN] = useState<number>(20); // NEW
@@ -84,8 +84,7 @@ ineups] = useState<Lineup[]>([]);
   useEffect(() => { loadRuns(); }, []);
 
   return (
-      <main className="min-h-screen p-6 space-y-6">
-        <RunFilters csvName="runs_filtered.csv"  rows={runs} onFiltered={setFiltered} />
+    <main className="min-h-screen p-6 space-y-6">
       <h1 className="text-2xl font-bold">Runs</h1>
 
       <div className="space-y-2">
