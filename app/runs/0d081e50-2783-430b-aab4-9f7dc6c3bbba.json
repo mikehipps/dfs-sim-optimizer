@@ -1,0 +1,10 @@
+{
+  "run_id": "0d081e50-2783-430b-aab4-9f7dc6c3bbba",
+  "slate_id": "demo-mlb-2025-09-25",
+  "n_sims": 1000,
+  "created_at": "2025-09-25 16:25:00.350738",
+  "status": "done",
+  "progress": 1.0,
+  "message": "finished",
+  "pool_size": 12
+}

@@ -1,0 +1,1422 @@
+[
+  {
+    "lineup_id": "L001",
+    "players": [
+      {
+        "player_id": "pP2",
+        "name": "Sam Starter",
+        "team": "LAD",
+        "pos": "P",
+        "salary": 8600,
+        "proj": 17.2
+      },
+      {
+        "player_id": "p16",
+        "name": "Pete Power",
+        "team": "ATL",
+        "pos": "1B",
+        "salary": 4500,
+        "proj": 11.3
+      },
+      {
+        "player_id": "p12",
+        "name": "Leo Light",
+        "team": "SFG",
+        "pos": "OF",
+        "salary": 3600,
+        "proj": 8.3
+      },
+      {
+        "player_id": "p18",
+        "name": "Roy Raker",
+        "team": "CHW",
+        "pos": "3B",
+        "salary": 3900,
+        "proj": 9.1
+      },
+      {
+        "player_id": "p11",
+        "name": "Kai King",
+        "team": "PHI",
+        "pos": "SS",
+        "salary": 3800,
+        "proj": 9.6
+      },
+      {
+        "player_id": "p10",
+        "name": "Jake Jack",
+        "team": "LAA",
+        "pos": "3B",
+        "salary": 3700,
+        "proj": 9.2
+      },
+      {
+        "player_id": "p14",
+        "name": "Ned Nailer",
+        "team": "SDP",
+        "pos": "OF",
+        "salary": 4000,
+        "proj": 9.0
+      },
+      {
+        "player_id": "p5",
+        "name": "Eli Batter",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 4200,
+        "proj": 10.5
+      }
+    ],
+    "salary": 36300,
+    "proj": 84.2
+  },
+  {
+    "lineup_id": "L002",
+    "players": [
+      {
+        "player_id": "pP3",
+        "name": "Will Workhorse",
+        "team": "NYM",
+        "pos": "P",
+        "salary": 9100,
+        "proj": 19.1
+      },
+      {
+        "player_id": "p17",
+        "name": "Quinn Quick",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 3700,
+        "proj": 8.6
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p18",
+        "name": "Roy Raker",
+        "team": "CHW",
+        "pos": "3B",
+        "salary": 3900,
+        "proj": 9.1
+      },
+      {
+        "player_id": "p2",
+        "name": "Ben Batter",
+        "team": "BOS",
+        "pos": "2B",
+        "salary": 3400,
+        "proj": 8.9
+      },
+      {
+        "player_id": "p13",
+        "name": "Max Mash",
+        "team": "MIL",
+        "pos": "OF",
+        "salary": 4400,
+        "proj": 11.1
+      },
+      {
+        "player_id": "p6",
+        "name": "Finn Batter",
+        "team": "ATL",
+        "pos": "OF",
+        "salary": 4100,
+        "proj": 9.7
+      },
+      {
+        "player_id": "p7",
+        "name": "Gabe Batter",
+        "team": "CHC",
+        "pos": "OF",
+        "salary": 3900,
+        "proj": 8.8
+      }
+    ],
+    "salary": 35700,
+    "proj": 84.7
+  },
+  {
+    "lineup_id": "L003",
+    "players": [
+      {
+        "player_id": "pP1",
+        "name": "Pat Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8900,
+        "proj": 18.4
+      },
+      {
+        "player_id": "p18",
+        "name": "Roy Raker",
+        "team": "CHW",
+        "pos": "3B",
+        "salary": 3900,
+        "proj": 9.1
+      },
+      {
+        "player_id": "p3",
+        "name": "Cam Batter",
+        "team": "LAD",
+        "pos": "3B",
+        "salary": 3600,
+        "proj": 9.8
+      },
+      {
+        "player_id": "p11",
+        "name": "Kai King",
+        "team": "PHI",
+        "pos": "SS",
+        "salary": 3800,
+        "proj": 9.6
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p16",
+        "name": "Pete Power",
+        "team": "ATL",
+        "pos": "1B",
+        "salary": 4500,
+        "proj": 11.3
+      },
+      {
+        "player_id": "p2",
+        "name": "Ben Batter",
+        "team": "BOS",
+        "pos": "2B",
+        "salary": 3400,
+        "proj": 8.9
+      },
+      {
+        "player_id": "p7",
+        "name": "Gabe Batter",
+        "team": "CHC",
+        "pos": "OF",
+        "salary": 3900,
+        "proj": 8.8
+      }
+    ],
+    "salary": 35200,
+    "proj": 85.3
+  },
+  {
+    "lineup_id": "L004",
+    "players": [
+      {
+        "player_id": "pP2",
+        "name": "Sam Starter",
+        "team": "LAD",
+        "pos": "P",
+        "salary": 8600,
+        "proj": 17.2
+      },
+      {
+        "player_id": "p13",
+        "name": "Max Mash",
+        "team": "MIL",
+        "pos": "OF",
+        "salary": 4400,
+        "proj": 11.1
+      },
+      {
+        "player_id": "p16",
+        "name": "Pete Power",
+        "team": "ATL",
+        "pos": "1B",
+        "salary": 4500,
+        "proj": 11.3
+      },
+      {
+        "player_id": "p10",
+        "name": "Jake Jack",
+        "team": "LAA",
+        "pos": "3B",
+        "salary": 3700,
+        "proj": 9.2
+      },
+      {
+        "player_id": "p9",
+        "name": "Ian Infielder",
+        "team": "SEA",
+        "pos": "2B",
+        "salary": 3100,
+        "proj": 7.9
+      },
+      {
+        "player_id": "p5",
+        "name": "Eli Batter",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 4200,
+        "proj": 10.5
+      },
+      {
+        "player_id": "p2",
+        "name": "Ben Batter",
+        "team": "BOS",
+        "pos": "2B",
+        "salary": 3400,
+        "proj": 8.9
+      },
+      {
+        "player_id": "p15",
+        "name": "Ollie OnBase",
+        "team": "TBR",
+        "pos": "2B",
+        "salary": 3500,
+        "proj": 8.5
+      }
+    ],
+    "salary": 35400,
+    "proj": 84.6
+  },
+  {
+    "lineup_id": "L005",
+    "players": [
+      {
+        "player_id": "pP3",
+        "name": "Will Workhorse",
+        "team": "NYM",
+        "pos": "P",
+        "salary": 9100,
+        "proj": 19.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p16",
+        "name": "Pete Power",
+        "team": "ATL",
+        "pos": "1B",
+        "salary": 4500,
+        "proj": 11.3
+      },
+      {
+        "player_id": "p4",
+        "name": "Drew Batter",
+        "team": "HOU",
+        "pos": "SS",
+        "salary": 3500,
+        "proj": 8.2
+      },
+      {
+        "player_id": "p10",
+        "name": "Jake Jack",
+        "team": "LAA",
+        "pos": "3B",
+        "salary": 3700,
+        "proj": 9.2
+      },
+      {
+        "player_id": "p8",
+        "name": "Hank Hitter",
+        "team": "TOR",
+        "pos": "1B",
+        "salary": 3300,
+        "proj": 8.7
+      },
+      {
+        "player_id": "p7",
+        "name": "Gabe Batter",
+        "team": "CHC",
+        "pos": "OF",
+        "salary": 3900,
+        "proj": 8.8
+      },
+      {
+        "player_id": "p6",
+        "name": "Finn Batter",
+        "team": "ATL",
+        "pos": "OF",
+        "salary": 4100,
+        "proj": 9.7
+      }
+    ],
+    "salary": 35300,
+    "proj": 84.4
+  },
+  {
+    "lineup_id": "L006",
+    "players": [
+      {
+        "player_id": "pP2",
+        "name": "Sam Starter",
+        "team": "LAD",
+        "pos": "P",
+        "salary": 8600,
+        "proj": 17.2
+      },
+      {
+        "player_id": "p2",
+        "name": "Ben Batter",
+        "team": "BOS",
+        "pos": "2B",
+        "salary": 3400,
+        "proj": 8.9
+      },
+      {
+        "player_id": "p10",
+        "name": "Jake Jack",
+        "team": "LAA",
+        "pos": "3B",
+        "salary": 3700,
+        "proj": 9.2
+      },
+      {
+        "player_id": "p8",
+        "name": "Hank Hitter",
+        "team": "TOR",
+        "pos": "1B",
+        "salary": 3300,
+        "proj": 8.7
+      },
+      {
+        "player_id": "p12",
+        "name": "Leo Light",
+        "team": "SFG",
+        "pos": "OF",
+        "salary": 3600,
+        "proj": 8.3
+      },
+      {
+        "player_id": "p16",
+        "name": "Pete Power",
+        "team": "ATL",
+        "pos": "1B",
+        "salary": 4500,
+        "proj": 11.3
+      },
+      {
+        "player_id": "p7",
+        "name": "Gabe Batter",
+        "team": "CHC",
+        "pos": "OF",
+        "salary": 3900,
+        "proj": 8.8
+      },
+      {
+        "player_id": "p13",
+        "name": "Max Mash",
+        "team": "MIL",
+        "pos": "OF",
+        "salary": 4400,
+        "proj": 11.1
+      }
+    ],
+    "salary": 35400,
+    "proj": 83.5
+  },
+  {
+    "lineup_id": "L007",
+    "players": [
+      {
+        "player_id": "pP1",
+        "name": "Pat Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8900,
+        "proj": 18.4
+      },
+      {
+        "player_id": "p12",
+        "name": "Leo Light",
+        "team": "SFG",
+        "pos": "OF",
+        "salary": 3600,
+        "proj": 8.3
+      },
+      {
+        "player_id": "p4",
+        "name": "Drew Batter",
+        "team": "HOU",
+        "pos": "SS",
+        "salary": 3500,
+        "proj": 8.2
+      },
+      {
+        "player_id": "p16",
+        "name": "Pete Power",
+        "team": "ATL",
+        "pos": "1B",
+        "salary": 4500,
+        "proj": 11.3
+      },
+      {
+        "player_id": "p5",
+        "name": "Eli Batter",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 4200,
+        "proj": 10.5
+      },
+      {
+        "player_id": "p17",
+        "name": "Quinn Quick",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 3700,
+        "proj": 8.6
+      },
+      {
+        "player_id": "p10",
+        "name": "Jake Jack",
+        "team": "LAA",
+        "pos": "3B",
+        "salary": 3700,
+        "proj": 9.2
+      },
+      {
+        "player_id": "p6",
+        "name": "Finn Batter",
+        "team": "ATL",
+        "pos": "OF",
+        "salary": 4100,
+        "proj": 9.7
+      }
+    ],
+    "salary": 36200,
+    "proj": 84.2
+  },
+  {
+    "lineup_id": "L008",
+    "players": [
+      {
+        "player_id": "pP2",
+        "name": "Sam Starter",
+        "team": "LAD",
+        "pos": "P",
+        "salary": 8600,
+        "proj": 17.2
+      },
+      {
+        "player_id": "p15",
+        "name": "Ollie OnBase",
+        "team": "TBR",
+        "pos": "2B",
+        "salary": 3500,
+        "proj": 8.5
+      },
+      {
+        "player_id": "p13",
+        "name": "Max Mash",
+        "team": "MIL",
+        "pos": "OF",
+        "salary": 4400,
+        "proj": 11.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p7",
+        "name": "Gabe Batter",
+        "team": "CHC",
+        "pos": "OF",
+        "salary": 3900,
+        "proj": 8.8
+      },
+      {
+        "player_id": "p17",
+        "name": "Quinn Quick",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 3700,
+        "proj": 8.6
+      },
+      {
+        "player_id": "p9",
+        "name": "Ian Infielder",
+        "team": "SEA",
+        "pos": "2B",
+        "salary": 3100,
+        "proj": 7.9
+      },
+      {
+        "player_id": "p14",
+        "name": "Ned Nailer",
+        "team": "SDP",
+        "pos": "OF",
+        "salary": 4000,
+        "proj": 9.0
+      }
+    ],
+    "salary": 34400,
+    "proj": 80.5
+  },
+  {
+    "lineup_id": "L009",
+    "players": [
+      {
+        "player_id": "pP2",
+        "name": "Sam Starter",
+        "team": "LAD",
+        "pos": "P",
+        "salary": 8600,
+        "proj": 17.2
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p5",
+        "name": "Eli Batter",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 4200,
+        "proj": 10.5
+      },
+      {
+        "player_id": "p11",
+        "name": "Kai King",
+        "team": "PHI",
+        "pos": "SS",
+        "salary": 3800,
+        "proj": 9.6
+      },
+      {
+        "player_id": "p3",
+        "name": "Cam Batter",
+        "team": "LAD",
+        "pos": "3B",
+        "salary": 3600,
+        "proj": 9.8
+      },
+      {
+        "player_id": "p12",
+        "name": "Leo Light",
+        "team": "SFG",
+        "pos": "OF",
+        "salary": 3600,
+        "proj": 8.3
+      },
+      {
+        "player_id": "p14",
+        "name": "Ned Nailer",
+        "team": "SDP",
+        "pos": "OF",
+        "salary": 4000,
+        "proj": 9.0
+      },
+      {
+        "player_id": "p2",
+        "name": "Ben Batter",
+        "team": "BOS",
+        "pos": "2B",
+        "salary": 3400,
+        "proj": 8.9
+      }
+    ],
+    "salary": 34400,
+    "proj": 82.7
+  },
+  {
+    "lineup_id": "L010",
+    "players": [
+      {
+        "player_id": "pP1",
+        "name": "Pat Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8900,
+        "proj": 18.4
+      },
+      {
+        "player_id": "p11",
+        "name": "Kai King",
+        "team": "PHI",
+        "pos": "SS",
+        "salary": 3800,
+        "proj": 9.6
+      },
+      {
+        "player_id": "p5",
+        "name": "Eli Batter",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 4200,
+        "proj": 10.5
+      },
+      {
+        "player_id": "p6",
+        "name": "Finn Batter",
+        "team": "ATL",
+        "pos": "OF",
+        "salary": 4100,
+        "proj": 9.7
+      },
+      {
+        "player_id": "p13",
+        "name": "Max Mash",
+        "team": "MIL",
+        "pos": "OF",
+        "salary": 4400,
+        "proj": 11.1
+      },
+      {
+        "player_id": "p17",
+        "name": "Quinn Quick",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 3700,
+        "proj": 8.6
+      },
+      {
+        "player_id": "p14",
+        "name": "Ned Nailer",
+        "team": "SDP",
+        "pos": "OF",
+        "salary": 4000,
+        "proj": 9.0
+      },
+      {
+        "player_id": "p16",
+        "name": "Pete Power",
+        "team": "ATL",
+        "pos": "1B",
+        "salary": 4500,
+        "proj": 11.3
+      }
+    ],
+    "salary": 37600,
+    "proj": 88.2
+  },
+  {
+    "lineup_id": "L011",
+    "players": [
+      {
+        "player_id": "pP2",
+        "name": "Sam Starter",
+        "team": "LAD",
+        "pos": "P",
+        "salary": 8600,
+        "proj": 17.2
+      },
+      {
+        "player_id": "p5",
+        "name": "Eli Batter",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 4200,
+        "proj": 10.5
+      },
+      {
+        "player_id": "p3",
+        "name": "Cam Batter",
+        "team": "LAD",
+        "pos": "3B",
+        "salary": 3600,
+        "proj": 9.8
+      },
+      {
+        "player_id": "p13",
+        "name": "Max Mash",
+        "team": "MIL",
+        "pos": "OF",
+        "salary": 4400,
+        "proj": 11.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p9",
+        "name": "Ian Infielder",
+        "team": "SEA",
+        "pos": "2B",
+        "salary": 3100,
+        "proj": 7.9
+      },
+      {
+        "player_id": "p11",
+        "name": "Kai King",
+        "team": "PHI",
+        "pos": "SS",
+        "salary": 3800,
+        "proj": 9.6
+      },
+      {
+        "player_id": "p12",
+        "name": "Leo Light",
+        "team": "SFG",
+        "pos": "OF",
+        "salary": 3600,
+        "proj": 8.3
+      }
+    ],
+    "salary": 34500,
+    "proj": 83.8
+  },
+  {
+    "lineup_id": "L012",
+    "players": [
+      {
+        "player_id": "pP2",
+        "name": "Sam Starter",
+        "team": "LAD",
+        "pos": "P",
+        "salary": 8600,
+        "proj": 17.2
+      },
+      {
+        "player_id": "p6",
+        "name": "Finn Batter",
+        "team": "ATL",
+        "pos": "OF",
+        "salary": 4100,
+        "proj": 9.7
+      },
+      {
+        "player_id": "p12",
+        "name": "Leo Light",
+        "team": "SFG",
+        "pos": "OF",
+        "salary": 3600,
+        "proj": 8.3
+      },
+      {
+        "player_id": "p3",
+        "name": "Cam Batter",
+        "team": "LAD",
+        "pos": "3B",
+        "salary": 3600,
+        "proj": 9.8
+      },
+      {
+        "player_id": "p14",
+        "name": "Ned Nailer",
+        "team": "SDP",
+        "pos": "OF",
+        "salary": 4000,
+        "proj": 9.0
+      },
+      {
+        "player_id": "p8",
+        "name": "Hank Hitter",
+        "team": "TOR",
+        "pos": "1B",
+        "salary": 3300,
+        "proj": 8.7
+      },
+      {
+        "player_id": "p9",
+        "name": "Ian Infielder",
+        "team": "SEA",
+        "pos": "2B",
+        "salary": 3100,
+        "proj": 7.9
+      },
+      {
+        "player_id": "p18",
+        "name": "Roy Raker",
+        "team": "CHW",
+        "pos": "3B",
+        "salary": 3900,
+        "proj": 9.1
+      }
+    ],
+    "salary": 34200,
+    "proj": 79.7
+  },
+  {
+    "lineup_id": "L013",
+    "players": [
+      {
+        "player_id": "pP3",
+        "name": "Will Workhorse",
+        "team": "NYM",
+        "pos": "P",
+        "salary": 9100,
+        "proj": 19.1
+      },
+      {
+        "player_id": "p4",
+        "name": "Drew Batter",
+        "team": "HOU",
+        "pos": "SS",
+        "salary": 3500,
+        "proj": 8.2
+      },
+      {
+        "player_id": "p11",
+        "name": "Kai King",
+        "team": "PHI",
+        "pos": "SS",
+        "salary": 3800,
+        "proj": 9.6
+      },
+      {
+        "player_id": "p8",
+        "name": "Hank Hitter",
+        "team": "TOR",
+        "pos": "1B",
+        "salary": 3300,
+        "proj": 8.7
+      },
+      {
+        "player_id": "p17",
+        "name": "Quinn Quick",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 3700,
+        "proj": 8.6
+      },
+      {
+        "player_id": "p14",
+        "name": "Ned Nailer",
+        "team": "SDP",
+        "pos": "OF",
+        "salary": 4000,
+        "proj": 9.0
+      },
+      {
+        "player_id": "p2",
+        "name": "Ben Batter",
+        "team": "BOS",
+        "pos": "2B",
+        "salary": 3400,
+        "proj": 8.9
+      },
+      {
+        "player_id": "p12",
+        "name": "Leo Light",
+        "team": "SFG",
+        "pos": "OF",
+        "salary": 3600,
+        "proj": 8.3
+      }
+    ],
+    "salary": 34400,
+    "proj": 80.4
+  },
+  {
+    "lineup_id": "L014",
+    "players": [
+      {
+        "player_id": "pP3",
+        "name": "Will Workhorse",
+        "team": "NYM",
+        "pos": "P",
+        "salary": 9100,
+        "proj": 19.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p11",
+        "name": "Kai King",
+        "team": "PHI",
+        "pos": "SS",
+        "salary": 3800,
+        "proj": 9.6
+      },
+      {
+        "player_id": "p16",
+        "name": "Pete Power",
+        "team": "ATL",
+        "pos": "1B",
+        "salary": 4500,
+        "proj": 11.3
+      },
+      {
+        "player_id": "p9",
+        "name": "Ian Infielder",
+        "team": "SEA",
+        "pos": "2B",
+        "salary": 3100,
+        "proj": 7.9
+      },
+      {
+        "player_id": "p6",
+        "name": "Finn Batter",
+        "team": "ATL",
+        "pos": "OF",
+        "salary": 4100,
+        "proj": 9.7
+      },
+      {
+        "player_id": "p3",
+        "name": "Cam Batter",
+        "team": "LAD",
+        "pos": "3B",
+        "salary": 3600,
+        "proj": 9.8
+      },
+      {
+        "player_id": "p18",
+        "name": "Roy Raker",
+        "team": "CHW",
+        "pos": "3B",
+        "salary": 3900,
+        "proj": 9.1
+      }
+    ],
+    "salary": 35300,
+    "proj": 85.9
+  },
+  {
+    "lineup_id": "L015",
+    "players": [
+      {
+        "player_id": "pP2",
+        "name": "Sam Starter",
+        "team": "LAD",
+        "pos": "P",
+        "salary": 8600,
+        "proj": 17.2
+      },
+      {
+        "player_id": "p8",
+        "name": "Hank Hitter",
+        "team": "TOR",
+        "pos": "1B",
+        "salary": 3300,
+        "proj": 8.7
+      },
+      {
+        "player_id": "p6",
+        "name": "Finn Batter",
+        "team": "ATL",
+        "pos": "OF",
+        "salary": 4100,
+        "proj": 9.7
+      },
+      {
+        "player_id": "p14",
+        "name": "Ned Nailer",
+        "team": "SDP",
+        "pos": "OF",
+        "salary": 4000,
+        "proj": 9.0
+      },
+      {
+        "player_id": "p10",
+        "name": "Jake Jack",
+        "team": "LAA",
+        "pos": "3B",
+        "salary": 3700,
+        "proj": 9.2
+      },
+      {
+        "player_id": "p12",
+        "name": "Leo Light",
+        "team": "SFG",
+        "pos": "OF",
+        "salary": 3600,
+        "proj": 8.3
+      },
+      {
+        "player_id": "p9",
+        "name": "Ian Infielder",
+        "team": "SEA",
+        "pos": "2B",
+        "salary": 3100,
+        "proj": 7.9
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      }
+    ],
+    "salary": 33600,
+    "proj": 79.4
+  },
+  {
+    "lineup_id": "L016",
+    "players": [
+      {
+        "player_id": "pP2",
+        "name": "Sam Starter",
+        "team": "LAD",
+        "pos": "P",
+        "salary": 8600,
+        "proj": 17.2
+      },
+      {
+        "player_id": "p8",
+        "name": "Hank Hitter",
+        "team": "TOR",
+        "pos": "1B",
+        "salary": 3300,
+        "proj": 8.7
+      },
+      {
+        "player_id": "p17",
+        "name": "Quinn Quick",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 3700,
+        "proj": 8.6
+      },
+      {
+        "player_id": "p14",
+        "name": "Ned Nailer",
+        "team": "SDP",
+        "pos": "OF",
+        "salary": 4000,
+        "proj": 9.0
+      },
+      {
+        "player_id": "p18",
+        "name": "Roy Raker",
+        "team": "CHW",
+        "pos": "3B",
+        "salary": 3900,
+        "proj": 9.1
+      },
+      {
+        "player_id": "p15",
+        "name": "Ollie OnBase",
+        "team": "TBR",
+        "pos": "2B",
+        "salary": 3500,
+        "proj": 8.5
+      },
+      {
+        "player_id": "p3",
+        "name": "Cam Batter",
+        "team": "LAD",
+        "pos": "3B",
+        "salary": 3600,
+        "proj": 9.8
+      },
+      {
+        "player_id": "p13",
+        "name": "Max Mash",
+        "team": "MIL",
+        "pos": "OF",
+        "salary": 4400,
+        "proj": 11.1
+      }
+    ],
+    "salary": 35000,
+    "proj": 82.0
+  },
+  {
+    "lineup_id": "L017",
+    "players": [
+      {
+        "player_id": "pP3",
+        "name": "Will Workhorse",
+        "team": "NYM",
+        "pos": "P",
+        "salary": 9100,
+        "proj": 19.1
+      },
+      {
+        "player_id": "p12",
+        "name": "Leo Light",
+        "team": "SFG",
+        "pos": "OF",
+        "salary": 3600,
+        "proj": 8.3
+      },
+      {
+        "player_id": "p7",
+        "name": "Gabe Batter",
+        "team": "CHC",
+        "pos": "OF",
+        "salary": 3900,
+        "proj": 8.8
+      },
+      {
+        "player_id": "p5",
+        "name": "Eli Batter",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 4200,
+        "proj": 10.5
+      },
+      {
+        "player_id": "p15",
+        "name": "Ollie OnBase",
+        "team": "TBR",
+        "pos": "2B",
+        "salary": 3500,
+        "proj": 8.5
+      },
+      {
+        "player_id": "p10",
+        "name": "Jake Jack",
+        "team": "LAA",
+        "pos": "3B",
+        "salary": 3700,
+        "proj": 9.2
+      },
+      {
+        "player_id": "p13",
+        "name": "Max Mash",
+        "team": "MIL",
+        "pos": "OF",
+        "salary": 4400,
+        "proj": 11.1
+      },
+      {
+        "player_id": "p14",
+        "name": "Ned Nailer",
+        "team": "SDP",
+        "pos": "OF",
+        "salary": 4000,
+        "proj": 9.0
+      }
+    ],
+    "salary": 36400,
+    "proj": 84.5
+  },
+  {
+    "lineup_id": "L018",
+    "players": [
+      {
+        "player_id": "pP3",
+        "name": "Will Workhorse",
+        "team": "NYM",
+        "pos": "P",
+        "salary": 9100,
+        "proj": 19.1
+      },
+      {
+        "player_id": "p15",
+        "name": "Ollie OnBase",
+        "team": "TBR",
+        "pos": "2B",
+        "salary": 3500,
+        "proj": 8.5
+      },
+      {
+        "player_id": "p8",
+        "name": "Hank Hitter",
+        "team": "TOR",
+        "pos": "1B",
+        "salary": 3300,
+        "proj": 8.7
+      },
+      {
+        "player_id": "p3",
+        "name": "Cam Batter",
+        "team": "LAD",
+        "pos": "3B",
+        "salary": 3600,
+        "proj": 9.8
+      },
+      {
+        "player_id": "p6",
+        "name": "Finn Batter",
+        "team": "ATL",
+        "pos": "OF",
+        "salary": 4100,
+        "proj": 9.7
+      },
+      {
+        "player_id": "p2",
+        "name": "Ben Batter",
+        "team": "BOS",
+        "pos": "2B",
+        "salary": 3400,
+        "proj": 8.9
+      },
+      {
+        "player_id": "p11",
+        "name": "Kai King",
+        "team": "PHI",
+        "pos": "SS",
+        "salary": 3800,
+        "proj": 9.6
+      },
+      {
+        "player_id": "p4",
+        "name": "Drew Batter",
+        "team": "HOU",
+        "pos": "SS",
+        "salary": 3500,
+        "proj": 8.2
+      }
+    ],
+    "salary": 34300,
+    "proj": 82.5
+  },
+  {
+    "lineup_id": "L019",
+    "players": [
+      {
+        "player_id": "pP1",
+        "name": "Pat Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8900,
+        "proj": 18.4
+      },
+      {
+        "player_id": "p2",
+        "name": "Ben Batter",
+        "team": "BOS",
+        "pos": "2B",
+        "salary": 3400,
+        "proj": 8.9
+      },
+      {
+        "player_id": "p14",
+        "name": "Ned Nailer",
+        "team": "SDP",
+        "pos": "OF",
+        "salary": 4000,
+        "proj": 9.0
+      },
+      {
+        "player_id": "p11",
+        "name": "Kai King",
+        "team": "PHI",
+        "pos": "SS",
+        "salary": 3800,
+        "proj": 9.6
+      },
+      {
+        "player_id": "p12",
+        "name": "Leo Light",
+        "team": "SFG",
+        "pos": "OF",
+        "salary": 3600,
+        "proj": 8.3
+      },
+      {
+        "player_id": "p5",
+        "name": "Eli Batter",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 4200,
+        "proj": 10.5
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p17",
+        "name": "Quinn Quick",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 3700,
+        "proj": 8.6
+      }
+    ],
+    "salary": 34800,
+    "proj": 82.7
+  },
+  {
+    "lineup_id": "L020",
+    "players": [
+      {
+        "player_id": "pP1",
+        "name": "Pat Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8900,
+        "proj": 18.4
+      },
+      {
+        "player_id": "p5",
+        "name": "Eli Batter",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 4200,
+        "proj": 10.5
+      },
+      {
+        "player_id": "p12",
+        "name": "Leo Light",
+        "team": "SFG",
+        "pos": "OF",
+        "salary": 3600,
+        "proj": 8.3
+      },
+      {
+        "player_id": "p7",
+        "name": "Gabe Batter",
+        "team": "CHC",
+        "pos": "OF",
+        "salary": 3900,
+        "proj": 8.8
+      },
+      {
+        "player_id": "p16",
+        "name": "Pete Power",
+        "team": "ATL",
+        "pos": "1B",
+        "salary": 4500,
+        "proj": 11.3
+      },
+      {
+        "player_id": "p3",
+        "name": "Cam Batter",
+        "team": "LAD",
+        "pos": "3B",
+        "salary": 3600,
+        "proj": 9.8
+      },
+      {
+        "player_id": "p17",
+        "name": "Quinn Quick",
+        "team": "NYM",
+        "pos": "OF",
+        "salary": 3700,
+        "proj": 8.6
+      },
+      {
+        "player_id": "p8",
+        "name": "Hank Hitter",
+        "team": "TOR",
+        "pos": "1B",
+        "salary": 3300,
+        "proj": 8.7
+      }
+    ],
+    "salary": 35700,
+    "proj": 84.4
+  }
+]

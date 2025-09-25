@@ -1,3 +1,22 @@
 player_id,name,team,position,salary,proj
+pP1,Pat Pitcher,ATL,P,8900,18.4
+pP2,Sam Starter,LAD,P,8600,17.2
+pP3,Will Workhorse,NYM,P,9100,19.1
 p1,Alice Batter,NYM,1B,3200,9.4
-p2,Bob Pitcher,ATL,P,8800,18.1
+p2,Ben Batter,BOS,2B,3400,8.9
+p3,Cam Batter,LAD,3B,3600,9.8
+p4,Drew Batter,HOU,SS,3500,8.2
+p5,Eli Batter,NYM,OF,4200,10.5
+p6,Finn Batter,ATL,OF,4100,9.7
+p7,Gabe Batter,CHC,OF,3900,8.8
+p8,Hank Hitter,TOR,1B,3300,8.7
+p9,Ian Infielder,SEA,2B,3100,7.9
+p10,Jake Jack,LAA,3B,3700,9.2
+p11,Kai King,PHI,SS,3800,9.6
+p12,Leo Light,SFG,OF,3600,8.3
+p13,Max Mash,MIL,OF,4400,11.1
+p14,Ned Nailer,SDP,OF,4000,9.0
+p15,Ollie OnBase,TBR,2B,3500,8.5
+p16,Pete Power,ATL,1B,4500,11.3
+p17,Quinn Quick,NYM,OF,3700,8.6
+p18,Roy Raker,CHW,3B,3900,9.1

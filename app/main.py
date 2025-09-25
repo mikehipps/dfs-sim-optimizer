@@ -9,6 +9,7 @@ import csv
 from io import StringIO
 import json
 from pathlib import Path
+import random
 
 from .models import RunRequest, RunRecord
 from .storage import save_run, load_run, list_runs, RUNS_DIR
@@ -17,6 +18,7 @@ from .exporter import write_fd_csv_stub
 from .input_models import PlayerProjection, PlayerOwnership
 from .data_storage import save_projections, save_ownership, get_inputs_info
 from .pool import load_pool
+from .field_model import sample_lineup_ownership_weighted
 
 app = FastAPI(title="DFS Sim Optimizer")
 
@@ -48,7 +50,6 @@ def upload_ownership(slate_id: str, items: List[PlayerOwnership]):
 # -------- inputs (CSV) --------
 @app.post("/slates/{slate_id}/projections.csv")
 async def upload_projections_csv(slate_id: str, file: UploadFile = File(...)):
-    # Expect: player_id,name,team,position,salary,proj
     content = (await file.read()).decode("utf-8", errors="replace")
     reader = csv.DictReader(StringIO(content))
     required = {"player_id", "name", "team", "position", "salary", "proj"}
@@ -73,7 +74,6 @@ async def upload_projections_csv(slate_id: str, file: UploadFile = File(...)):
 
 @app.post("/slates/{slate_id}/ownership.csv")
 async def upload_ownership_csv(slate_id: str, file: UploadFile = File(...)):
-    # Expect: player_id,own_pct
     content = (await file.read()).decode("utf-8", errors="replace")
     reader = csv.DictReader(StringIO(content))
     required = {"player_id", "own_pct"}
@@ -96,6 +96,16 @@ async def upload_ownership_csv(slate_id: str, file: UploadFile = File(...)):
 def slate_inputs(slate_id: str):
     return get_inputs_info(slate_id)
 
+# -------- field model test --------
+@app.get("/slates/{slate_id}/sample-lineup")
+def sample_lineup(slate_id: str, seed: int = Query(42)):
+    rng = random.Random(seed)
+    try:
+        ln = sample_lineup_ownership_weighted(slate_id, rng)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    return {"slate_id": slate_id, "seed": seed, "lineup": ln}
+
 # -------- runs --------
 @app.post("/runs")
 def start_run(req: RunRequest):
@@ -106,7 +116,9 @@ def start_run(req: RunRequest):
         n_sims=req.n_sims,
         created_at=datetime.utcnow(),
     )
-    save_run(run_id, record.model_dump())
+    rec = record.model_dump()
+    rec["pool_size"] = req.pool_size  # NEW: store requested pool size
+    save_run(run_id, rec)
     Thread(target=simulate_run, args=(run_id,), daemon=True).start()
     return {"run_id": run_id, "status": "created"}
 

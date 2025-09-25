@@ -17,6 +17,7 @@ type RunRecord = {
 
 export default function Home() {
   const [slate, setSlate] = useState("demo-mlb-2025-09-25");
+  const [poolSize, setPoolSize] = useState<number>(50);
   const [runId, setRunId] = useState<string | null>(null);
   const [rec, setRec] = useState<RunRecord | null>(null);
   const [busy, setBusy] = useState(false);
@@ -26,10 +27,11 @@ export default function Home() {
     setBusy(true);
     setRec(null);
     try {
+      const size = Math.max(1, Math.min(1000, Number(poolSize) || 50));
       const r = await fetch(`${API}/runs`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slate_id: slate, n_sims: 1000 }),
+        body: JSON.stringify({ slate_id: slate, n_sims: 1000, pool_size: size }),
       });
       const data: RunResp = await r.json();
       setRunId(data.run_id);
@@ -74,6 +76,15 @@ export default function Home() {
           value={slate}
           onChange={(e) => setSlate(e.target.value)}
           className="border rounded px-2 py-1"
+        />
+        <label className="text-sm ml-4">Pool size:</label>
+        <input
+          type="number"
+          min={1}
+          max={1000}
+          value={poolSize}
+          onChange={(e) => setPoolSize(Number(e.target.value))}
+          className="border rounded px-2 py-1 w-24"
         />
         <button
           onClick={startRun}

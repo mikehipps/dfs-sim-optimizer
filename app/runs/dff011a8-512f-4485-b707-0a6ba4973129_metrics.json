@@ -1,0 +1,19 @@
+{
+  "lineups": [
+    {
+      "lineup_id": "L001",
+      "proj": 83.4,
+      "salary": 34700,
+      "value_per_k": 2.403,
+      "z_proj": 0.0,
+      "proj_rank": 1
+    }
+  ],
+  "pool_stats": {
+    "count": 1,
+    "mean_proj": 83.4,
+    "std_proj": 0.0,
+    "min_salary": 34700,
+    "max_salary": 34700
+  }
+}
