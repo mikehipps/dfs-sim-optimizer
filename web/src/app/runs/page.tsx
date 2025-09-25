@@ -86,7 +86,11 @@ const [runId, setRunId] = useState("");
   return (
     <main className="min-h-screen p-6 space-y-6">
       <h1 className="text-2xl font-bold">Runs</h1>
+        {lineups.length ? (
         <div style={{ margin: "12px 0" }}><RunFilters rows={lineups} onFiltered={setFiltered} csvName="runs_filtered.csv" /></div>
+        ) : (
+        <div style={{ margin: "12px 0", opacity: 0.7, fontSize: 12 }}>Load lineups to enable filters.</div>
+        )}
 
       <div className="space-y-2">
         <div className="font-medium">Recent (latest 10)</div>
