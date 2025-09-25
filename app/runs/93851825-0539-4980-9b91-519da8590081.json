@@ -1,0 +1,16 @@
+{
+  "run_id": "93851825-0539-4980-9b91-519da8590081",
+  "slate_id": "demo-mlb-2025-09-25",
+  "n_sims": 1000,
+  "created_at": "2025-09-25 18:59:26.089788",
+  "status": "error",
+  "progress": 0.0,
+  "message": "failed to build lineup with requested constraints; adjust cap/stack/site or inputs",
+  "pool_size": 50,
+  "salary_cap": 35000,
+  "min_stack": 0,
+  "avoid_hvp": false,
+  "field_size": 1000,
+  "corr_sigma": 1.5,
+  "site": "FD"
+}
