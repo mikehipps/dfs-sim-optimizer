@@ -1,8 +1,6 @@
 "use client";
+import React, { useEffect, useMemo, useState } from 'react';
 
-import { useEffect, useMemo, useStat  const shown = useMemo(() => filtered ?? runs, [filtered, runs]);
-
-  e } from 'react';
 import RunFilters from '../../../components/RunFilters';
 const API = process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000";
 
@@ -26,7 +24,8 @@ export default function RunsPage() {
   const [filtered, setFiltered] = useState<any[] | null>(null);
 const [runs, setRuns] = useState<RunLite[]>([]);
   const [runId, setRunId] = useState("");
-  const [lineups, setLineups] = useState<Lineup[]>([]);
+  const [lineups, setL  const shown = useMemo(() => filtered ?? runs, [filtered, runs]);
+ineups] = useState<Lineup[]>([]);
   const [metrics, setMetrics] = useState<MetricsResp | null>(null);
   const [simstats, setSimstats] = useState<SimstatsResp | null>(null);
   const [exportN, setExportN] = useState<number>(20); // NEW
