@@ -102,7 +102,11 @@ export default function Home() {
       if (data.status === "done" || data.status === "error") {
         setBusy(false);
         if (timerRef.current) {
-          if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+          if (timerRef.current) {
+  clearInterval(timerRef.current);
+  timerRef.current = null;
+}
+
           timerRef.current = null;
           timerRef.current = null;
         }
@@ -117,7 +121,11 @@ export default function Home() {
     timerRef.current = setInterval(() => fetchRun(runId), 800);
     return () => {
       if (timerRef.current) {
-          if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+          if (timerRef.current) {
+  clearInterval(timerRef.current);
+  timerRef.current = null;
+}
+
           timerRef.current = null;
         timerRef.current = null;
       }
