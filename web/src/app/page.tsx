@@ -36,7 +36,7 @@ export default function Home() {
   const [runId, setRunId] = useState<string | null>(null);
   const [rec, setRec] = useState<RunRecord | null>(null);
   const [busy, setBusy] = useState(false);
-  const timerRef = useRef<NodeJS.Timer | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   function applyContestDefaults() {
     const cs = Math.max(50, Math.min(100000, Number(contestSize) || 1000));
@@ -102,8 +102,8 @@ export default function Home() {
       if (data.status === "done" || data.status === "error") {
         setBusy(false);
         if (timerRef.current) {
-          
-    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+          if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+          timerRef.current = null;
           timerRef.current = null;
         }
       }
@@ -117,8 +117,8 @@ export default function Home() {
     timerRef.current = setInterval(() => fetchRun(runId), 800);
     return () => {
       if (timerRef.current) {
-        
-    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+          if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+          timerRef.current = null;
         timerRef.current = null;
       }
     };
