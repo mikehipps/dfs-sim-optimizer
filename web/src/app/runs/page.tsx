@@ -23,8 +23,8 @@ type SimstatsResp = {
 export default function RunsPage() {
   const [runs, setRuns] = useState<RunLite[]>([]);
   const [filtered, setFiltered] = useState<any[] | null>(null);
-  const shown = useMemo(() => filtered ?? runs, [filtered, runs]);
-  const [runId, setRunId] = useState("");
+  const shown = useMemo(() => filtered ?? lineups, [filtered, lineups]);
+const [runId, setRunId] = useState("");
   const [lineups, setLineups] = useState<Lineup[]>([]);
   const [metrics, setMetrics] = useState<MetricsResp | null>(null);
   const [simstats, setSimstats] = useState<SimstatsResp | null>(null);
@@ -86,6 +86,7 @@ export default function RunsPage() {
   return (
     <main className="min-h-screen p-6 space-y-6">
       <h1 className="text-2xl font-bold">Runs</h1>
+        <div style={{ margin: "12px 0" }}><RunFilters rows={lineups} onFiltered={setFiltered} csvName="runs_filtered.csv" /></div>
 
       <div className="space-y-2">
         <div className="font-medium">Recent (latest 10)</div>
@@ -224,7 +225,7 @@ export default function RunsPage() {
                 </tr>
               </thead>
               <tbody>
-                {lineups.map((ln) => (
+                {shown.map((ln) => (
                   <tr key={ln.lineup_id} className="border-t">
                     <td className="p-2 font-mono">{ln.lineup_id}</td>
                     <td className="p-2">{ln.salary}</td>
