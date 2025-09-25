@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from 'react';
 import RunFilters from '../../../components/RunFilters';
 const API = process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000";
 
@@ -21,6 +21,9 @@ type SimstatsResp = {
 };
 
 export default function RunsPage() {
+  const [filtered, setFiltered] = useState<any[] | null>(null);
+  const shown = useMemo(() => filtered ?? runs, [filtered, runs]);
+
   const [runs, setRuns] = useState<RunLite[]>([]);
   const [runId, setRunId] = useState("");
   const [lineups, setLineups] = useState<Lineup[]>([]);
@@ -83,13 +86,13 @@ export default function RunsPage() {
 
   return (
       <main className="min-h-screen p-6 space-y-6">
-        <RunFilters csvName="runs_filtered.csv" />
+        <RunFilters csvName="runs_filtered.csv"  rows={runs} onFiltered={setFiltered} />
       <h1 className="text-2xl font-bold">Runs</h1>
 
       <div className="space-y-2">
         <div className="font-medium">Recent (latest 10)</div>
         <ul className="list-disc ml-6">
-          {runs.map(r => (
+          {shown.map(r => (
             <li key={r.run_id}>
               <button className="underline" onClick={() => setRunId(r.run_id)} title="Click to select this run_id">
                 {r.run_id.slice(0,8)}
