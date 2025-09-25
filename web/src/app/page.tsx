@@ -1,103 +1,103 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+const API = process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000";
+
+type RunResp = { run_id: string; status: string };
+type RunRecord = {
+  run_id: string;
+  slate_id: string;
+  n_sims: number;
+  status: string;
+  progress: number;
+  message: string;
+  created_at: string;
+};
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [runId, setRunId] = useState<string | null>(null);
+  const [rec, setRec] = useState<RunRecord | null>(null);
+  const [busy, setBusy] = useState(false);
+  const timerRef = useRef<NodeJS.Timer | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  async function startRun() {
+    setBusy(true);
+    setRec(null);
+    try {
+      const r = await fetch(`${API}/runs`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slate_id: "demo-mlb-2025-09-25", n_sims: 1000 }),
+      });
+      const data: RunResp = await r.json();
+      setRunId(data.run_id);
+    } catch (e) {
+      console.error(e);
+      alert("Failed to start run");
+      setBusy(false);
+    }
+  }
+
+  async function fetchRun(id: string) {
+    const r = await fetch(`${API}/runs/${id}`);
+    if (!r.ok) return;
+    const data: RunRecord = await r.json();
+    setRec(data);
+    if (data.status === "done" || data.status === "error") {
+      setBusy(false);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (!runId) return;
+    timerRef.current = setInterval(() => fetchRun(runId), 300);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [runId]);
+
+  const pct = Math.round((rec?.progress ?? 0) * 100);
+
+  return (
+    <main className="min-h-screen p-6 flex flex-col items-center gap-6">
+      <h1 className="text-2xl font-bold">DFS Sim Optimizer — Minimal UI</h1>
+
+      <button
+        onClick={startRun}
+        disabled={busy}
+        className="px-4 py-2 rounded bg-blue-600 text-white disabled:opacity-50"
+      >
+        {busy ? "Running..." : "Start Demo Run"}
+      </button>
+
+      {rec && (
+        <div className="w-full max-w-xl space-y-2">
+          <div className="text-sm">
+            <span className="font-mono">{rec.run_id.slice(0, 8)}</span> — {rec.status} — {pct}%
+          </div>
+          <div className="w-full h-3 bg-gray-200 rounded">
+            <div
+              className="h-3 bg-blue-600 rounded"
+              style={{ width: `${pct}%` }}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
+          <div className="text-xs text-gray-600">{rec.message}</div>
+
+          {rec.status === "done" && (
+            <a
+              className="inline-block mt-2 underline text-blue-700"
+              href={`${API}/exports/${rec.run_id}/fd-stub`}
+            >
+              Download CSV (stub)
+            </a>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      )}
+    </main>
   );
 }
