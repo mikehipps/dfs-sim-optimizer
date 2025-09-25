@@ -52,6 +52,19 @@ function playerListFromRow(row: Record<string, any>): string[] {
   return textish ? textish.split(SEP).map(normalizeName).filter(Boolean) : [];
 }
 
+/* ---------------------------- URL param helpers --------------------------- */
+function getParam(u: URLSearchParams, k: string): string | undefined {
+  const v = u.get(k);
+  return v !== null && v !== '' ? v : undefined;
+}
+function setParam(u: URLSearchParams, k: string, v: string | number | undefined) {
+  if (v === undefined || v === '' || (typeof v === 'number' && !Number.isFinite(v))) {
+    u.delete(k);
+  } else {
+    u.set(k, String(v));
+  }
+}
+
 /* ------------------------------ filter ------------------------------ */
 
 export function applyFilters<T extends Record<string, any>>(rows: T[], f: Filters): T[] {
@@ -139,13 +152,28 @@ export function exportToCsv(rows: Array<Record<string, any>>, name = 'filtered_r
 
 /* ------------------------------- UI --------------------------------- */
 
+
 export default function RunFilters(props: Props) {
-  const [minTop10Pct, setMinTop10Pct] = useState<number | ''>(props.initial?.minTop10Pct ?? '');
+    const [minTop10Pct, setMinTop10Pct] = useState<number | ''>(props.initial?.minTop10Pct ?? '');
   const [minProj, setMinProj] = useState<number | ''>(props.initial?.minProj ?? '');
   const [salaryMin, setSalaryMin] = useState<number | ''>(props.initial?.salaryMin ?? '');
   const [salaryMax, setSalaryMax] = useState<number | ''>(props.initial?.salaryMax ?? '');
   const [includeRaw, setIncludeRaw] = useState<string>((props.initial?.includePlayers ?? []).join(', '));
   const [excludeRaw, setExcludeRaw] = useState<string>((props.initial?.excludePlayers ?? []).join(', '));
+
+  // --- URL -> state (on mount) ---
+  useEffect(() => {
+    try {
+      const sp = new URLSearchParams(window.location.search);
+      // only hydrate if the field is still blank (user hasn't typed)
+      if (minTop10Pct === '') { const t = getParam(sp, 't'); if (t) setMinTop10Pct(Number(t)); }
+      if (minProj     === '') { const p = getParam(sp, 'p'); if (p) setMinProj(Number(p)); }
+      if (salaryMin   === '') { const sm = getParam(sp, 'smin'); if (sm) setSalaryMin(Number(sm)); }
+      if (salaryMax   === '') { const sx = getParam(sp, 'smax'); if (sx) setSalaryMax(Number(sx)); }
+      if (!includeRaw) { const inc = getParam(sp, 'inc'); if (inc) setIncludeRaw(inc); }
+      if (!excludeRaw) { const exc = getParam(sp, 'exc'); if (exc) setExcludeRaw(exc); }
+    } catch {}
+  }, []);
 
   const filters: Filters = useMemo(() => ({
     minTop10Pct: minTop10Pct === '' ? undefined : Number(minTop10Pct),
@@ -168,6 +196,21 @@ export default function RunFilters(props: Props) {
     }
   }, [filtered, props.onFiltered]);
 
+
+  /* sync filters -> URL */
+  useEffect(() => {
+    try {
+      const sp = new URLSearchParams(window.location.search);
+      setParam(sp, 't', filters.minTop10Pct);
+      setParam(sp, 'p', filters.minProj);
+      setParam(sp, 'smin', filters.salaryMin);
+      setParam(sp, 'smax', filters.salaryMax);
+      setParam(sp, 'inc', (filters.includePlayers ?? []).join(','));
+      setParam(sp, 'exc', (filters.excludePlayers ?? []).join(','));
+      const url = window.location.pathname + '?' + sp.toString();
+      window.history.replaceState(null, '', url);
+    } catch {}
+  }, [filters]);
   const onClear = () => {
     setMinTop10Pct('');
     setMinProj('');
