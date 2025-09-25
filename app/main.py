@@ -49,7 +49,6 @@ def upload_ownership(slate_id: str, items: List[PlayerOwnership]):
 # -------- inputs (CSV) --------
 @app.post("/slates/{slate_id}/projections.csv")
 async def upload_projections_csv(slate_id: str, file: UploadFile = File(...)):
-    # Expect: player_id,name,team,position,salary,proj
     content = (await file.read()).decode("utf-8", errors="replace")
     reader = csv.DictReader(StringIO(content))
     required = {"player_id", "name", "team", "position", "salary", "proj"}
@@ -74,7 +73,6 @@ async def upload_projections_csv(slate_id: str, file: UploadFile = File(...)):
 
 @app.post("/slates/{slate_id}/ownership.csv")
 async def upload_ownership_csv(slate_id: str, file: UploadFile = File(...)):
-    # Expect: player_id,own_pct
     content = (await file.read()).decode("utf-8", errors="replace")
     reader = csv.DictReader(StringIO(content))
     required = {"player_id", "own_pct"}
@@ -135,6 +133,8 @@ def start_run(req: RunRequest):
     rec["salary_cap"] = req.salary_cap
     rec["min_stack"]  = req.min_stack
     rec["avoid_hvp"]  = req.avoid_hvp
+    rec["field_size"] = req.field_size   # NEW
+    rec["corr_sigma"] = req.corr_sigma   # NEW
     save_run(run_id, rec)
     Thread(target=simulate_run, args=(run_id,), daemon=True).start()
     return {"run_id": run_id, "status": "created"}
@@ -176,6 +176,7 @@ def get_run_simstats(run_id: str):
     with p.open() as f:
         return json.load(f)
 
+# -------- export endpoints --------
 @app.get("/exports/{run_id}/fd-stub")
 def export_fd_stub(run_id: str, n: int = Query(10, ge=1, le=500)):
     rec = load_run(run_id)
@@ -186,7 +187,6 @@ def export_fd_stub(run_id: str, n: int = Query(10, ge=1, le=500)):
     path = write_fd_csv_stub(run_id, n_lineups=n)
     return FileResponse(path, media_type="text/csv", filename=path.name)
 
-# -------- export: Top-N by Top10% rate --------
 @app.get("/exports/{run_id}/top-by-sim")
 def export_top_by_sim(run_id: str, n: int = Query(20, ge=1, le=500)):
     rec = load_run(run_id)
@@ -194,7 +194,6 @@ def export_top_by_sim(run_id: str, n: int = Query(20, ge=1, le=500)):
         raise HTTPException(status_code=404, detail="run not found")
     if rec.get("status") != "done":
         raise HTTPException(status_code=400, detail="run not finished yet")
-    # local import to avoid editing the top imports
     from .exporter import write_top_by_sim
     path = write_top_by_sim(run_id, n=n)
     return FileResponse(path, media_type="text/csv", filename=path.name)

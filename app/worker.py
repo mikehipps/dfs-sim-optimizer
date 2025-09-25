@@ -4,7 +4,7 @@ from .data_storage import get_inputs_info
 from .pool import save_pool
 from .metrics import summarize_pool, save_metrics
 from .field_model import sample_lineup_weighted_roster
-from .simulator import simulate_pool_outcomes, save_simstats  # NEW
+from .simulator import simulate_pool_outcomes, save_simstats
 
 def _dedupe_key(lineup):
     return tuple(sorted(p["player_id"] for p in lineup["players"]))
@@ -17,12 +17,14 @@ def simulate_run(run_id: str, n_steps: int = 12, delay_s: float = 0.05) -> None:
             update_run(run_id, status="error", message="run record missing")
             return
 
-        slate_id   = rec.get("slate_id", "")
+        slate_id    = rec.get("slate_id", "")
         target_pool = int(rec.get("pool_size", 50))
         salary_cap  = int(rec.get("salary_cap", 40000))
         min_stack   = int(rec.get("min_stack", 0))
         avoid_hvp   = bool(rec.get("avoid_hvp", False))
         n_sims      = int(rec.get("n_sims", 1000))
+        field_size  = int(rec.get("field_size", max(200, target_pool * 20)))
+        corr_sigma  = float(rec.get("corr_sigma", 1.5))
 
         info = get_inputs_info(slate_id)
         if not info.get("has_projections") or not info.get("has_ownership"):
@@ -56,12 +58,12 @@ def simulate_run(run_id: str, n_steps: int = 12, delay_s: float = 0.05) -> None:
         save_metrics(run_id, summary)
         update_run(run_id, progress=0.65, message="metrics computed")
 
-        # --- Outcome sims (NEW) ---
+        # --- Outcome sims (uses your controls) ---
         simstats = simulate_pool_outcomes(
             pool,
-            n_sims=max(100, min(n_sims, 2000)),             # clamp for now
-            field_size=max(200, target_pool * 20),
-            corr_sigma=1.5,
+            n_sims=max(50, min(n_sims, 5000)),              # safety clamp
+            field_size=max(100, field_size),
+            corr_sigma=float(corr_sigma),
             seed=seed,
         )
         save_simstats(run_id, simstats)

@@ -25,6 +25,7 @@ export default function RunsPage() {
   const [lineups, setLineups] = useState<Lineup[]>([]);
   const [metrics, setMetrics] = useState<MetricsResp | null>(null);
   const [simstats, setSimstats] = useState<SimstatsResp | null>(null);
+  const [exportN, setExportN] = useState<number>(20); // NEW
   const [msg, setMsg] = useState("");
 
   async function loadRuns() {
@@ -88,11 +89,7 @@ export default function RunsPage() {
         <ul className="list-disc ml-6">
           {runs.map(r => (
             <li key={r.run_id}>
-              <button
-                className="underline"
-                onClick={() => setRunId(r.run_id)}
-                title="Click to select this run_id"
-              >
+              <button className="underline" onClick={() => setRunId(r.run_id)} title="Click to select this run_id">
                 {r.run_id.slice(0,8)}
               </button>{" "}
               — {r.slate_id} — {r.status} — {Math.round((r.progress ?? 0)*100)}%
@@ -107,6 +104,23 @@ export default function RunsPage() {
         <button onClick={loadLineups} className="px-3 py-1 rounded bg-blue-600 text-white">Load lineups</button>
         <button onClick={loadMetrics} className="px-3 py-1 rounded bg-emerald-600 text-white">Load metrics</button>
         <button onClick={loadSimstats} className="px-3 py-1 rounded bg-purple-700 text-white">Load simstats</button>
+
+        {/* NEW: Export Top by Sim */}
+        <span className="ml-4 text-sm">Top-by-Sim (N):</span>
+        <input
+          type="number"
+          min={1}
+          max={500}
+          value={exportN}
+          onChange={(e) => setExportN(Number(e.target.value))}
+          className="border rounded px-2 py-1 w-20"
+        />
+        <a
+          className={`px-3 py-1 rounded ${runId ? "bg-gray-800 text-white" : "bg-gray-300 text-gray-600 pointer-events-none"}`}
+          href={runId ? `${API}/exports/${encodeURIComponent(runId)}/top-by-sim?n=${Math.max(1, Math.min(500, Number(exportN) || 20))}` : "#"}
+        >
+          Download
+        </a>
       </div>
 
       {msg && <div className="text-sm text-gray-700">{msg}</div>}
@@ -174,7 +188,7 @@ export default function RunsPage() {
               <tbody>
                 {simstats.lineups
                   .slice()
-                  .sort((a,b) => b.top10_rate - a.top10_rate) // sort by top10_rate desc
+                  .sort((a,b) => b.top10_rate - a.top10_rate)
                   .slice(0, 15)
                   .map(m => (
                     <tr key={m.lineup_id} className="border-t">
@@ -189,7 +203,7 @@ export default function RunsPage() {
               </tbody>
             </table>
           </div>
-          <div className="text-xs text-gray-600">Sorted by Top 10% rate. Use the API for full results.</div>
+          <div className="text-xs text-gray-600">Sorted by Top 10% rate. Use the download to get all rows.</div>
         </div>
       )}
 

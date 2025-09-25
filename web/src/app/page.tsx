@@ -20,6 +20,12 @@ export default function Home() {
   const [poolSize, setPoolSize] = useState<number>(50);
   const [salaryCap, setSalaryCap] = useState<number>(40000);
   const [minStack, setMinStack] = useState<number>(0);
+
+  // NEW sim controls
+  const [nSims, setNSims] = useState<number>(1000);
+  const [fieldSize, setFieldSize] = useState<number>(1000);
+  const [corrSigma, setCorrSigma] = useState<number>(1.5);
+
   const [runId, setRunId] = useState<string | null>(null);
   const [rec, setRec] = useState<RunRecord | null>(null);
   const [busy, setBusy] = useState(false);
@@ -32,15 +38,23 @@ export default function Home() {
       const size = Math.max(1, Math.min(1000, Number(poolSize) || 50));
       const cap = Math.max(1, Math.min(100000, Number(salaryCap) || 40000));
       const stack = Math.max(0, Math.min(7, Number(minStack) || 0));
+
+      // clamps for sim controls
+      const sims = Math.max(50, Math.min(5000, Number(nSims) || 1000));
+      const field = Math.max(100, Math.min(20000, Number(fieldSize) || 1000));
+      const sigma = Math.max(0, Math.min(5, Number(corrSigma) || 1.5));
+
       const r = await fetch(`${API}/runs`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           slate_id: slate,
-          n_sims: 1000,
+          n_sims: sims,
           pool_size: size,
           salary_cap: cap,
           min_stack: stack,
+          field_size: field,     // NEW
+          corr_sigma: sigma,     // NEW
         }),
       });
       const data: RunResp = await r.json();
@@ -66,15 +80,13 @@ export default function Home() {
           timerRef.current = null;
         }
       }
-    } catch (err) {
-      // Swallow transient network errors; next tick will retry.
-      // console.debug("poll error", err);
+    } catch {
+      // swallow transient fetch errors; next tick will retry
     }
   }
 
   useEffect(() => {
     if (!runId) return;
-    // poll every 800ms instead of 300ms to reduce chance of overlap
     timerRef.current = setInterval(() => fetchRun(runId), 800);
     return () => {
       if (timerRef.current) {
@@ -95,34 +107,23 @@ export default function Home() {
         <input value={slate} onChange={(e) => setSlate(e.target.value)} className="border rounded px-2 py-1" />
 
         <label className="text-sm">Pool size:</label>
-        <input
-          type="number"
-          min={1}
-          max={1000}
-          value={poolSize}
-          onChange={(e) => setPoolSize(Number(e.target.value))}
-          className="border rounded px-2 py-1 w-24"
-        />
+        <input type="number" min={1} max={1000} value={poolSize} onChange={(e) => setPoolSize(Number(e.target.value))} className="border rounded px-2 py-1 w-24" />
 
         <label className="text-sm">Salary cap:</label>
-        <input
-          type="number"
-          min={1000}
-          max={100000}
-          value={salaryCap}
-          onChange={(e) => setSalaryCap(Number(e.target.value))}
-          className="border rounded px-2 py-1 w-28"
-        />
+        <input type="number" min={1000} max={100000} value={salaryCap} onChange={(e) => setSalaryCap(Number(e.target.value))} className="border rounded px-2 py-1 w-28" />
 
         <label className="text-sm">Min stack:</label>
-        <input
-          type="number"
-          min={0}
-          max={7}
-          value={minStack}
-          onChange={(e) => setMinStack(Number(e.target.value))}
-          className="border rounded px-2 py-1 w-20"
-        />
+        <input type="number" min={0} max={7} value={minStack} onChange={(e) => setMinStack(Number(e.target.value))} className="border rounded px-2 py-1 w-20" />
+
+        {/* NEW: sim controls */}
+        <label className="text-sm ml-2">N sims:</label>
+        <input type="number" min={50} max={5000} value={nSims} onChange={(e) => setNSims(Number(e.target.value))} className="border rounded px-2 py-1 w-24" />
+
+        <label className="text-sm">Field size:</label>
+        <input type="number" min={100} max={20000} value={fieldSize} onChange={(e) => setFieldSize(Number(e.target.value))} className="border rounded px-2 py-1 w-28" />
+
+        <label className="text-sm">Corr σ:</label>
+        <input type="number" min={0} max={5} step="0.1" value={corrSigma} onChange={(e) => setCorrSigma(Number(e.target.value))} className="border rounded px-2 py-1 w-24" />
 
         <button onClick={startRun} disabled={busy} className="px-4 py-2 rounded bg-blue-600 text-white disabled:opacity-50">
           {busy ? "Running..." : "Start Run"}

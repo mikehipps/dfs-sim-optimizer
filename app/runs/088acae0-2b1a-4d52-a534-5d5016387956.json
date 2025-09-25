@@ -1,0 +1,15 @@
+{
+  "run_id": "088acae0-2b1a-4d52-a534-5d5016387956",
+  "slate_id": "demo-mlb-2025-09-25",
+  "n_sims": 750,
+  "created_at": "2025-09-25 17:33:45.157691",
+  "status": "done",
+  "progress": 1.0,
+  "message": "finished",
+  "pool_size": 50,
+  "salary_cap": 40000,
+  "min_stack": 0,
+  "avoid_hvp": false,
+  "field_size": 2000,
+  "corr_sigma": 2.0
+}
