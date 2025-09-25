@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const API = process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000";
-const SITE_DEFAULT_CAP: Record<"FD"|"DK", number> = { FD: 40000, DK: 50000 };
+const SITE_DEFAULT_CAP: Record<"FD"|"DK", number> = { FD: 35000, DK: 50000 };
 
 type RunResp = { run_id: string; status: string };
 type RunRecord = {
@@ -39,7 +39,7 @@ export default function Home() {
     try {
       const size = Math.max(1, Math.min(1000, Number(poolSize) || 50));
       const cap = Math.max(1, Math.min(100000, Number(salaryCap) || SITE_DEFAULT_CAP[site]));
-      const maxStack = site === "DK" ? 8 : 7; // DK: 8 hitters, FD: 7
+      const maxStack = 8; // both FD and DK have 8 hitters
       const stack = Math.max(0, Math.min(maxStack, Number(minStack) || 0));
 
       const sims = Math.max(50, Math.min(5000, Number(nSims) || 1000));
@@ -140,7 +140,7 @@ export default function Home() {
         <input
           type="number"
           min={0}
-          max={site === "DK" ? 8 : 7}
+          max={8}
           value={minStack}
           onChange={(e) => setMinStack(Number(e.target.value))}
           className="border rounded px-2 py-1 w-20"
@@ -162,8 +162,10 @@ export default function Home() {
       </div>
 
       <div className="text-xs text-gray-600">
-        Roster: {site === "DK" ? "DK = 2P, C/1B, 2B, 3B, SS, OF×3, UTIL" : "FD = 1P, 1B, 2B, 3B, SS, OF×3"} · Default cap: $
-        {SITE_DEFAULT_CAP[site].toLocaleString()}
+        Roster:&nbsp;
+        {site === "DK"
+          ? "DK = 2P, C/1B, 2B, 3B, SS, OF×3, UTIL (cap $50k)"
+          : "FD = 1P, C/1B, 2B, 3B, SS, OF×3, UTIL (cap $35k)"}
       </div>
 
       {rec && (

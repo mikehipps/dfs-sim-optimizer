@@ -14,78 +14,106 @@ def _weights(ids: List[str], own_map: Dict[str, float]) -> List[float]:
     s = sum(ws)
     return ([1.0 / len(ids)] * len(ids)) if s <= 0 else [w / s for w in ws]
 
+def _is_hitter_pos(pos: str) -> bool:
+    return pos.upper() != "P"
+
+def _eligible_pool(by_pos: Dict[str, List[Dict[str, Any]]], slot: str) -> List[Dict[str, Any]]:
+    s = slot.upper()
+    if s == "UTIL":
+        # any hitter
+        all_hitters: List[Dict[str, Any]] = []
+        for k, lst in by_pos.items():
+            if k != "P":
+                all_hitters.extend(lst)
+        return all_hitters
+    if s in by_pos:
+        return by_pos[s]
+    if s in ("C/1B", "C1B"):
+        # allow either C or 1B; sample data likely only has 1B
+        return (by_pos.get("C", []) or []) + (by_pos.get("1B", []) or [])
+    return []
+
 def sample_lineup_weighted_roster(
     slate_id: str,
     rng: random.Random,
     salary_cap: int = 40000,
     min_stack: int = 0,
     avoid_hvp: bool = False,
+    site: str = "FD",
 ) -> Dict[str, Any]:
     """
-    Contest-like sampler:
-      Roster = 1P + [1B, 2B, 3B, SS, OF, OF, OF]
-      Ownership-weighted choices, no duplicates, enforce salary_cap.
-      If min_stack>0, ensure at least min_stack hitters from one team.
-      NOTE: avoid_hvp is a placeholder until we have matchup data.
+    Site-aware MLB rosters:
+      FD: 1P + [C/1B, 2B, 3B, SS, OF, OF, OF, UTIL] -> 9 total (8 hitters)
+      DK: 2P + [C/1B, 2B, 3B, SS, OF, OF, OF, UTIL] -> 10 total (8 hitters)
     """
     proj, own_map = _load_inputs(slate_id)
     if not proj:
         raise ValueError("no projections loaded")
 
     PITCHERS = [p for p in proj if p.get("position","").upper() == "P"]
-    H = [p for p in proj if p.get("position","").upper() != "P"]
-    by_pos = {}
-    for p in H:
-        by_pos.setdefault(p.get("position","").upper(), []).append(p)
+    H = [p for p in proj if _is_hitter_pos(p.get("position",""))]
     if not PITCHERS:
         raise ValueError("no pitchers in projections")
-    for need in ["1B","2B","3B","SS","OF"]:
-        if need != "OF" and len(by_pos.get(need, [])) == 0:
-            raise ValueError(f"need at least one {need}")
-    if len(by_pos.get("OF", [])) < 3:
-        raise ValueError("need at least 3 OF")
+    if len(H) < 8:
+        raise ValueError("insufficient hitters in projections")
 
-    roster_slots = ["1B","2B","3B","SS","OF","OF","OF"]
+    by_pos: Dict[str, List[Dict[str, Any]]] = {}
+    for p in proj:
+        pos = str(p.get("position","")).upper()
+        by_pos.setdefault(pos, []).append(p)
 
-    # Build team pools for hitters
+    site_u = (site or "FD").upper()
+    if site_u == "DK":
+        pitcher_slots = 2
+        hitter_slots = ["C/1B","2B","3B","SS","OF","OF","OF","UTIL"]
+        if len(PITCHERS) < 2: raise ValueError("need at least 2 pitchers for DK")
+        if len(_eligible_pool(by_pos,"OF")) < 3: raise ValueError("need at least 3 OF for DK")
+    else:
+        # FD
+        pitcher_slots = 1
+        hitter_slots = ["C/1B","2B","3B","SS","OF","OF","OF","UTIL"]
+        if len(_eligible_pool(by_pos,"OF")) < 3: raise ValueError("need at least 3 OF for FD")
+
+    # Build team -> hitters map
     team_hitters: Dict[str, List[Dict[str, Any]]] = {}
     for h in H:
         team_hitters.setdefault(h.get("team","UNK"), []).append(h)
     teams = list(team_hitters.keys())
 
-    # pick a stack team (weighted by count of eligible hitters)
     def pick_stack_team() -> str:
         counts = [len(team_hitters[t]) for t in teams]
         total = sum(counts) or 1
         weights = [c/total for c in counts]
         return rng.choices(teams, weights=weights, k=1)[0]
 
-    # Try a bunch of attempts to satisfy stack + cap
-    for _attempt in range(300):
-        # pitcher
-        pid_list = [p["player_id"] for p in PITCHERS]
-        p_probs = _weights(pid_list, own_map)
-        pitcher = rng.choices(PITCHERS, weights=p_probs, k=1)[0]
+    # Try multiple attempts to satisfy stack + cap
+    for _attempt in range(600):
+        chosen_ids = set()
+        lineup: List[Dict[str, Any]] = []
 
-        chosen_ids = {pitcher["player_id"]}
-        lineup = [pitcher]
+        # pitchers
+        p_pool = [p for p in PITCHERS]
+        for _ in range(pitcher_slots):
+            ids = [p["player_id"] for p in p_pool if p["player_id"] not in chosen_ids]
+            if not ids: break
+            probs = _weights(ids, own_map)
+            pick = rng.choices([pl for pl in p_pool if pl["player_id"] in ids], weights=probs, k=1)[0]
+            chosen_ids.add(pick["player_id"])
+            lineup.append(pick)
+        if len([x for x in lineup if x.get("position","").upper()=="P"]) != pitcher_slots:
+            continue
 
-        # (placeholder) avoid_hvp: we don't have matchups yet, so we can't disallow opponents specifically.
-        # We leave this for later when schedule/opponents are available.
-
-        # choose stack team if requested
+        # stack target
         stack_team = pick_stack_team() if min_stack > 0 else None
         stack_needed = max(0, min_stack)
 
-        # fill hitters by slot; first try to use stack team when possible
-        for slot in roster_slots:
-            pool = [pl for pl in by_pos[slot] if pl["player_id"] not in chosen_ids]
+        # hitters
+        for slot in hitter_slots:
+            pool = [pl for pl in _eligible_pool(by_pos, slot) if pl["player_id"] not in chosen_ids and _is_hitter_pos(pl.get("position",""))]
             if not pool:
                 break
-
-            # prefer stack team while we still need stack hitters and eligible exist
             if stack_team and stack_needed > 0:
-                pool_team = [pl for pl in pool if pl.get("team") == stack_team]
+                pool_team = [pl for pl in pool if pl.get("team")==stack_team]
                 if pool_team:
                     ids = [pl["player_id"] for pl in pool_team]
                     probs = _weights(ids, own_map)
@@ -93,32 +121,32 @@ def sample_lineup_weighted_roster(
                     chosen_ids.add(pick["player_id"])
                     lineup.append(pick)
                     stack_needed -= 1
-                    continue  # go next slot
-
-            # otherwise pick from full pool
+                    continue
             ids = [pl["player_id"] for pl in pool]
             probs = _weights(ids, own_map)
             pick = rng.choices(pool, weights=probs, k=1)[0]
             chosen_ids.add(pick["player_id"])
             lineup.append(pick)
 
-        else:
-            # all slots filled; check stack + cap
-            if min_stack > 0:
-                stack_hits = sum(1 for x in lineup if x is not None and x.get("team")==stack_team and x.get("position","").upper()!="P")
-                if stack_hits < min_stack:
-                    continue  # fail this attempt and retry
+        total_slots = pitcher_slots + len(hitter_slots)
+        if len(lineup) != total_slots:
+            continue
 
-            total_salary = int(sum(int(x.get("salary", 0)) for x in lineup))
-            if total_salary <= salary_cap:
-                total_proj = float(sum(float(x.get("proj", 0.0)) for x in lineup))
-                return {
-                    "players": [
-                        {"player_id": x["player_id"], "name": x["name"], "team": x["team"], "pos": x["position"], "salary": int(x["salary"]), "proj": float(x["proj"])}
-                        for x in lineup
-                    ],
-                    "salary": total_salary,
-                    "proj": total_proj,
-                }
+        if min_stack > 0:
+            hits_on_stack = sum(1 for x in lineup if _is_hitter_pos(x.get("position","")) and x.get("team")==stack_team)
+            if hits_on_stack < min_stack:
+                continue
 
-    raise ValueError("failed to build lineup with requested constraints; raise salary_cap or lower min_stack")
+        total_salary = int(sum(int(x.get("salary", 0)) for x in lineup))
+        if total_salary <= salary_cap:
+            total_proj = float(sum(float(x.get("proj", 0.0)) for x in lineup))
+            return {
+                "players": [
+                    {"player_id": x["player_id"], "name": x["name"], "team": x["team"], "pos": x["position"], "salary": int(x["salary"]), "proj": float(x["proj"])}
+                    for x in lineup
+                ],
+                "salary": total_salary,
+                "proj": total_proj,
+            }
+
+    raise ValueError("failed to build lineup with requested constraints; adjust cap/stack/site or inputs")
