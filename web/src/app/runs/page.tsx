@@ -23,9 +23,9 @@ type SimstatsResp = {
 export default function RunsPage() {
   const [runs, setRuns] = useState<RunLite[]>([]);
   const [filtered, setFiltered] = useState<any[] | null>(null);
-  const shown = useMemo(() => filtered ?? lineups, [filtered, lineups]);
 const [runId, setRunId] = useState("");
   const [lineups, setLineups] = useState<Lineup[]>([]);
+  const shown = useMemo(() => filtered ?? lineups, [filtered, lineups]);
   const [metrics, setMetrics] = useState<MetricsResp | null>(null);
   const [simstats, setSimstats] = useState<SimstatsResp | null>(null);
   const [exportN, setExportN] = useState<number>(20); // NEW
