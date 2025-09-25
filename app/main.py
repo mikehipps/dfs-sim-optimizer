@@ -7,9 +7,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 import csv
 from io import StringIO
+import json
+from pathlib import Path
 
 from .models import RunRequest, RunRecord
-from .storage import save_run, load_run, list_runs
+from .storage import save_run, load_run, list_runs, RUNS_DIR
 from .worker import simulate_run
 from .exporter import write_fd_csv_stub
 from .input_models import PlayerProjection, PlayerOwnership
@@ -127,6 +129,14 @@ def get_run_lineups(run_id: str, limit: int = Query(10, ge=1, le=1000), offset: 
     total = len(pool)
     end = min(offset + limit, total)
     return {"total": total, "limit": limit, "offset": offset, "lineups": pool[offset:end]}
+
+@app.get("/runs/{run_id}/metrics")
+def get_run_metrics(run_id: str):
+    p = RUNS_DIR / f"{run_id}_metrics.json"
+    if not p.exists():
+        raise HTTPException(status_code=404, detail="no metrics found for run")
+    with p.open() as f:
+        return json.load(f)
 
 @app.get("/exports/{run_id}/fd-stub")
 def export_fd_stub(run_id: str):

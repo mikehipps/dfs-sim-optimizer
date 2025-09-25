@@ -1,0 +1,712 @@
+[
+  {
+    "lineup_id": "L001",
+    "players": [
+      {
+        "player_id": "p2",
+        "name": "Bob Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8800,
+        "proj": 18.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      }
+    ],
+    "salary": 31200,
+    "proj": 83.9
+  },
+  {
+    "lineup_id": "L002",
+    "players": [
+      {
+        "player_id": "p2",
+        "name": "Bob Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8800,
+        "proj": 18.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      }
+    ],
+    "salary": 31200,
+    "proj": 83.9
+  },
+  {
+    "lineup_id": "L003",
+    "players": [
+      {
+        "player_id": "p2",
+        "name": "Bob Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8800,
+        "proj": 18.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      }
+    ],
+    "salary": 31200,
+    "proj": 83.9
+  },
+  {
+    "lineup_id": "L004",
+    "players": [
+      {
+        "player_id": "p2",
+        "name": "Bob Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8800,
+        "proj": 18.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      }
+    ],
+    "salary": 31200,
+    "proj": 83.9
+  },
+  {
+    "lineup_id": "L005",
+    "players": [
+      {
+        "player_id": "p2",
+        "name": "Bob Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8800,
+        "proj": 18.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      }
+    ],
+    "salary": 31200,
+    "proj": 83.9
+  },
+  {
+    "lineup_id": "L006",
+    "players": [
+      {
+        "player_id": "p2",
+        "name": "Bob Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8800,
+        "proj": 18.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      }
+    ],
+    "salary": 31200,
+    "proj": 83.9
+  },
+  {
+    "lineup_id": "L007",
+    "players": [
+      {
+        "player_id": "p2",
+        "name": "Bob Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8800,
+        "proj": 18.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      }
+    ],
+    "salary": 31200,
+    "proj": 83.9
+  },
+  {
+    "lineup_id": "L008",
+    "players": [
+      {
+        "player_id": "p2",
+        "name": "Bob Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8800,
+        "proj": 18.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      }
+    ],
+    "salary": 31200,
+    "proj": 83.9
+  },
+  {
+    "lineup_id": "L009",
+    "players": [
+      {
+        "player_id": "p2",
+        "name": "Bob Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8800,
+        "proj": 18.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      }
+    ],
+    "salary": 31200,
+    "proj": 83.9
+  },
+  {
+    "lineup_id": "L010",
+    "players": [
+      {
+        "player_id": "p2",
+        "name": "Bob Pitcher",
+        "team": "ATL",
+        "pos": "P",
+        "salary": 8800,
+        "proj": 18.1
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      },
+      {
+        "player_id": "p1",
+        "name": "Alice Batter",
+        "team": "NYM",
+        "pos": "1B",
+        "salary": 3200,
+        "proj": 9.4
+      }
+    ],
+    "salary": 31200,
+    "proj": 83.9
+  }
+]
