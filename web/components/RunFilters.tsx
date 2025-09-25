@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 export type Filters = {
   minTop10Pct?: number;    // 0–100
@@ -173,7 +173,13 @@ export default function RunFilters(props: Props) {
   const filtered = useMemo(() => {
     if (!props.rows) return undefined;
     const out = applyFilters(props.rows, filters);
-    props.onFiltered?.(out);
+
+  // notify parent AFTER render to avoid setState-in-render warning
+  useEffect(() => {
+    if (props.onFiltered && Array.isArray(filtered)) {
+      props.onFiltered(filtered);
+    }
+  }, [filtered, props.onFiltered]);
     return out;
   }, [props.rows, filters]);
 
