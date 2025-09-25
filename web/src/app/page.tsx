@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const API = process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000";
+const SITE_DEFAULT_CAP: Record<"FD"|"DK", number> = { FD: 40000, DK: 50000 };
 
 type RunResp = { run_id: string; status: string };
 type RunRecord = {
@@ -16,12 +17,13 @@ type RunRecord = {
 };
 
 export default function Home() {
+  const [site, setSite] = useState<"FD" | "DK">("FD");
   const [slate, setSlate] = useState("demo-mlb-2025-09-25");
   const [poolSize, setPoolSize] = useState<number>(50);
-  const [salaryCap, setSalaryCap] = useState<number>(40000);
+  const [salaryCap, setSalaryCap] = useState<number>(SITE_DEFAULT_CAP["FD"]);
   const [minStack, setMinStack] = useState<number>(0);
 
-  // NEW sim controls
+  // sim controls
   const [nSims, setNSims] = useState<number>(1000);
   const [fieldSize, setFieldSize] = useState<number>(1000);
   const [corrSigma, setCorrSigma] = useState<number>(1.5);
@@ -36,10 +38,10 @@ export default function Home() {
     setRec(null);
     try {
       const size = Math.max(1, Math.min(1000, Number(poolSize) || 50));
-      const cap = Math.max(1, Math.min(100000, Number(salaryCap) || 40000));
-      const stack = Math.max(0, Math.min(7, Number(minStack) || 0));
+      const cap = Math.max(1, Math.min(100000, Number(salaryCap) || SITE_DEFAULT_CAP[site]));
+      const maxStack = site === "DK" ? 8 : 7; // DK: 8 hitters, FD: 7
+      const stack = Math.max(0, Math.min(maxStack, Number(minStack) || 0));
 
-      // clamps for sim controls
       const sims = Math.max(50, Math.min(5000, Number(nSims) || 1000));
       const field = Math.max(100, Math.min(20000, Number(fieldSize) || 1000));
       const sigma = Math.max(0, Math.min(5, Number(corrSigma) || 1.5));
@@ -48,13 +50,14 @@ export default function Home() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          site,
           slate_id: slate,
           n_sims: sims,
           pool_size: size,
           salary_cap: cap,
           min_stack: stack,
-          field_size: field,     // NEW
-          corr_sigma: sigma,     // NEW
+          field_size: field,
+          corr_sigma: sigma,
         }),
       });
       const data: RunResp = await r.json();
@@ -103,6 +106,20 @@ export default function Home() {
       <h1 className="text-2xl font-bold">DFS Sim Optimizer — Minimal UI</h1>
 
       <div className="flex gap-3 items-center flex-wrap">
+        <label className="text-sm">Site:</label>
+        <select
+          value={site}
+          onChange={(e) => {
+            const s = (e.target.value === "DK" ? "DK" : "FD") as "FD"|"DK";
+            setSite(s);
+            setSalaryCap(SITE_DEFAULT_CAP[s]); // auto-fill cap
+          }}
+          className="border rounded px-2 py-1"
+        >
+          <option value="FD">FD</option>
+          <option value="DK">DK</option>
+        </select>
+
         <label className="text-sm">Slate:</label>
         <input value={slate} onChange={(e) => setSlate(e.target.value)} className="border rounded px-2 py-1" />
 
@@ -110,12 +127,26 @@ export default function Home() {
         <input type="number" min={1} max={1000} value={poolSize} onChange={(e) => setPoolSize(Number(e.target.value))} className="border rounded px-2 py-1 w-24" />
 
         <label className="text-sm">Salary cap:</label>
-        <input type="number" min={1000} max={100000} value={salaryCap} onChange={(e) => setSalaryCap(Number(e.target.value))} className="border rounded px-2 py-1 w-28" />
+        <input
+          type="number"
+          min={1000}
+          max={100000}
+          value={salaryCap}
+          onChange={(e) => setSalaryCap(Number(e.target.value))}
+          className="border rounded px-2 py-1 w-28"
+        />
 
         <label className="text-sm">Min stack:</label>
-        <input type="number" min={0} max={7} value={minStack} onChange={(e) => setMinStack(Number(e.target.value))} className="border rounded px-2 py-1 w-20" />
+        <input
+          type="number"
+          min={0}
+          max={site === "DK" ? 8 : 7}
+          value={minStack}
+          onChange={(e) => setMinStack(Number(e.target.value))}
+          className="border rounded px-2 py-1 w-20"
+        />
 
-        {/* NEW: sim controls */}
+        {/* sim controls */}
         <label className="text-sm ml-2">N sims:</label>
         <input type="number" min={50} max={5000} value={nSims} onChange={(e) => setNSims(Number(e.target.value))} className="border rounded px-2 py-1 w-24" />
 
@@ -128,6 +159,11 @@ export default function Home() {
         <button onClick={startRun} disabled={busy} className="px-4 py-2 rounded bg-blue-600 text-white disabled:opacity-50">
           {busy ? "Running..." : "Start Run"}
         </button>
+      </div>
+
+      <div className="text-xs text-gray-600">
+        Roster: {site === "DK" ? "DK = 2P, C/1B, 2B, 3B, SS, OF×3, UTIL" : "FD = 1P, 1B, 2B, 3B, SS, OF×3"} · Default cap: $
+        {SITE_DEFAULT_CAP[site].toLocaleString()}
       </div>
 
       {rec && (
