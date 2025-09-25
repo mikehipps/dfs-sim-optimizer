@@ -45,16 +45,12 @@ def upload_ownership(slate_id: str, items: List[PlayerOwnership]):
 # -------- inputs (CSV) --------
 @app.post("/slates/{slate_id}/projections.csv")
 async def upload_projections_csv(slate_id: str, file: UploadFile = File(...)):
-    # Expect header: player_id,name,team,position,salary,proj
+    # Expect: player_id,name,team,position,salary,proj
     content = (await file.read()).decode("utf-8", errors="replace")
     reader = csv.DictReader(StringIO(content))
     required = {"player_id", "name", "team", "position", "salary", "proj"}
     if set(reader.fieldnames or []) < required:
-        raise HTTPException(
-            status_code=400,
-            detail=f"CSV must include columns: {', '.join(sorted(required))}",
-        )
-
+        raise HTTPException(status_code=400, detail=f"CSV must include: {', '.join(sorted(required))}")
     items = []
     for row in reader:
         try:
@@ -68,8 +64,28 @@ async def upload_projections_csv(slate_id: str, file: UploadFile = File(...)):
             })
         except Exception:
             raise HTTPException(status_code=400, detail=f"Bad row: {row}")
-
     save_projections(slate_id, items)
+    info = get_inputs_info(slate_id)
+    return {"status": "saved", "rows": len(items), "info": info}
+
+@app.post("/slates/{slate_id}/ownership.csv")
+async def upload_ownership_csv(slate_id: str, file: UploadFile = File(...)):
+    # Expect: player_id,own_pct
+    content = (await file.read()).decode("utf-8", errors="replace")
+    reader = csv.DictReader(StringIO(content))
+    required = {"player_id", "own_pct"}
+    if set(reader.fieldnames or []) < required:
+        raise HTTPException(status_code=400, detail=f"CSV must include: {', '.join(sorted(required))}")
+    items = []
+    for row in reader:
+        try:
+            items.append({
+                "player_id": row["player_id"],
+                "own_pct": float(row["own_pct"]),
+            })
+        except Exception:
+            raise HTTPException(status_code=400, detail=f"Bad row: {row}")
+    save_ownership(slate_id, items)
     info = get_inputs_info(slate_id)
     return {"status": "saved", "rows": len(items), "info": info}
 
