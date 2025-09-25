@@ -117,7 +117,7 @@ def start_run(req: RunRequest):
         created_at=datetime.utcnow(),
     )
     rec = record.model_dump()
-    rec["pool_size"] = req.pool_size  # NEW: store requested pool size
+    rec["pool_size"] = req.pool_size  # store requested pool size
     save_run(run_id, rec)
     Thread(target=simulate_run, args=(run_id,), daemon=True).start()
     return {"run_id": run_id, "status": "created"}
@@ -151,11 +151,11 @@ def get_run_metrics(run_id: str):
         return json.load(f)
 
 @app.get("/exports/{run_id}/fd-stub")
-def export_fd_stub(run_id: str):
+def export_fd_stub(run_id: str, n: int = Query(10, ge=1, le=500)):
     rec = load_run(run_id)
     if not rec:
         raise HTTPException(status_code=404, detail="run not found")
     if rec.get("status") != "done":
         raise HTTPException(status_code=400, detail="run not finished yet")
-    path = write_fd_csv_stub(run_id, n_lineups=10)
+    path = write_fd_csv_stub(run_id, n_lineups=n)
     return FileResponse(path, media_type="text/csv", filename=path.name)
