@@ -1,0 +1,171 @@
+{
+  "lineups": [
+    {
+      "lineup_id": "L001",
+      "proj": 87.3,
+      "salary": 36500,
+      "value_per_k": 2.392,
+      "z_proj": 1.366,
+      "proj_rank": 3
+    },
+    {
+      "lineup_id": "L002",
+      "proj": 83.5,
+      "salary": 35400,
+      "value_per_k": 2.359,
+      "z_proj": -0.412,
+      "proj_rank": 13
+    },
+    {
+      "lineup_id": "L003",
+      "proj": 86.3,
+      "salary": 36700,
+      "value_per_k": 2.351,
+      "z_proj": 0.898,
+      "proj_rank": 6
+    },
+    {
+      "lineup_id": "L004",
+      "proj": 83.5,
+      "salary": 35700,
+      "value_per_k": 2.339,
+      "z_proj": -0.412,
+      "proj_rank": 14
+    },
+    {
+      "lineup_id": "L005",
+      "proj": 83.7,
+      "salary": 35300,
+      "value_per_k": 2.371,
+      "z_proj": -0.318,
+      "proj_rank": 12
+    },
+    {
+      "lineup_id": "L006",
+      "proj": 84.4,
+      "salary": 35600,
+      "value_per_k": 2.371,
+      "z_proj": 0.009,
+      "proj_rank": 9
+    },
+    {
+      "lineup_id": "L007",
+      "proj": 82.3,
+      "salary": 35400,
+      "value_per_k": 2.325,
+      "z_proj": -0.973,
+      "proj_rank": 16
+    },
+    {
+      "lineup_id": "L008",
+      "proj": 80.8,
+      "salary": 34500,
+      "value_per_k": 2.342,
+      "z_proj": -1.674,
+      "proj_rank": 20
+    },
+    {
+      "lineup_id": "L009",
+      "proj": 83.8,
+      "salary": 35600,
+      "value_per_k": 2.354,
+      "z_proj": -0.271,
+      "proj_rank": 10
+    },
+    {
+      "lineup_id": "L010",
+      "proj": 86.4,
+      "salary": 36200,
+      "value_per_k": 2.387,
+      "z_proj": 0.945,
+      "proj_rank": 5
+    },
+    {
+      "lineup_id": "L011",
+      "proj": 81.8,
+      "salary": 34800,
+      "value_per_k": 2.351,
+      "z_proj": -1.207,
+      "proj_rank": 18
+    },
+    {
+      "lineup_id": "L012",
+      "proj": 87.5,
+      "salary": 36700,
+      "value_per_k": 2.384,
+      "z_proj": 1.459,
+      "proj_rank": 2
+    },
+    {
+      "lineup_id": "L013",
+      "proj": 81.89999999999999,
+      "salary": 34700,
+      "value_per_k": 2.36,
+      "z_proj": -1.16,
+      "proj_rank": 17
+    },
+    {
+      "lineup_id": "L014",
+      "proj": 88.2,
+      "salary": 37000,
+      "value_per_k": 2.384,
+      "z_proj": 1.786,
+      "proj_rank": 1
+    },
+    {
+      "lineup_id": "L015",
+      "proj": 83.8,
+      "salary": 35000,
+      "value_per_k": 2.394,
+      "z_proj": -0.271,
+      "proj_rank": 11
+    },
+    {
+      "lineup_id": "L016",
+      "proj": 85.8,
+      "salary": 35300,
+      "value_per_k": 2.431,
+      "z_proj": 0.664,
+      "proj_rank": 7
+    },
+    {
+      "lineup_id": "L017",
+      "proj": 82.7,
+      "salary": 34600,
+      "value_per_k": 2.39,
+      "z_proj": -0.786,
+      "proj_rank": 15
+    },
+    {
+      "lineup_id": "L018",
+      "proj": 86.8,
+      "salary": 37100,
+      "value_per_k": 2.34,
+      "z_proj": 1.132,
+      "proj_rank": 4
+    },
+    {
+      "lineup_id": "L019",
+      "proj": 85.3,
+      "salary": 36100,
+      "value_per_k": 2.363,
+      "z_proj": 0.43,
+      "proj_rank": 8
+    },
+    {
+      "lineup_id": "L020",
+      "proj": 81.8,
+      "salary": 34600,
+      "value_per_k": 2.364,
+      "z_proj": -1.207,
+      "proj_rank": 19
+    }
+  ],
+  "pool_stats": {
+    "count": 20,
+    "mean_proj": 84.38,
+    "std_proj": 2.138,
+    "min_salary": 34500,
+    "max_salary": 37100
+  }
+}

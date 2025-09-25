@@ -12,24 +12,33 @@ type MetricsResp = {
   lineups: { lineup_id: string; proj: number; salary: number; value_per_k: number; z_proj: number; proj_rank: number }[];
 };
 
+type SimstatsResp = {
+  n_sims: number;
+  field_size: number;
+  corr_sigma: number;
+  lineups: { lineup_id: string; mean: number; stdev: number; top50_rate: number; top10_rate: number; top1_rate: number }[];
+};
+
 export default function RunsPage() {
   const [runs, setRuns] = useState<RunLite[]>([]);
   const [runId, setRunId] = useState("");
   const [lineups, setLineups] = useState<Lineup[]>([]);
   const [metrics, setMetrics] = useState<MetricsResp | null>(null);
+  const [simstats, setSimstats] = useState<SimstatsResp | null>(null);
   const [msg, setMsg] = useState("");
 
   async function loadRuns() {
-    const r = await fetch(`${API}/runs`);
+    const r = await fetch(`${API}/runs`, { cache: "no-store" });
+    if (!r.ok) return;
     const d: RunsResp = await r.json();
-    setRuns(d.runs.slice(0, 10)); // backend already sorts newest-first
+    setRuns(d.runs.slice(0, 10));
   }
 
   async function loadLineups() {
     setMsg("");
     setLineups([]);
     if (!runId) { setMsg("Enter a run_id"); return; }
-    const r = await fetch(`${API}/runs/${encodeURIComponent(runId)}/lineups?limit=10&offset=0`);
+    const r = await fetch(`${API}/runs/${encodeURIComponent(runId)}/lineups?limit=10&offset=0`, { cache: "no-store" });
     if (!r.ok) {
       const d = await r.json().catch(() => ({}));
       setMsg(d.detail || "Failed to fetch lineups");
@@ -44,7 +53,7 @@ export default function RunsPage() {
     setMsg("");
     setMetrics(null);
     if (!runId) { setMsg("Enter a run_id"); return; }
-    const r = await fetch(`${API}/runs/${encodeURIComponent(runId)}/metrics`);
+    const r = await fetch(`${API}/runs/${encodeURIComponent(runId)}/metrics`, { cache: "no-store" });
     if (!r.ok) {
       const d = await r.json().catch(() => ({}));
       setMsg(d.detail || "Failed to fetch metrics");
@@ -52,6 +61,20 @@ export default function RunsPage() {
     }
     const d: MetricsResp = await r.json();
     setMetrics(d);
+  }
+
+  async function loadSimstats() {
+    setMsg("");
+    setSimstats(null);
+    if (!runId) { setMsg("Enter a run_id"); return; }
+    const r = await fetch(`${API}/runs/${encodeURIComponent(runId)}/simstats`, { cache: "no-store" });
+    if (!r.ok) {
+      const d = await r.json().catch(() => ({}));
+      setMsg(d.detail || "Failed to fetch simstats");
+      return;
+    }
+    const d: SimstatsResp = await r.json();
+    setSimstats(d);
   }
 
   useEffect(() => { loadRuns(); }, []);
@@ -78,11 +101,12 @@ export default function RunsPage() {
         </ul>
       </div>
 
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 items-center flex-wrap">
         <label className="text-sm">Run ID:</label>
         <input value={runId} onChange={e => setRunId(e.target.value)} className="border rounded px-2 py-1 w-[360px]" />
         <button onClick={loadLineups} className="px-3 py-1 rounded bg-blue-600 text-white">Load lineups</button>
         <button onClick={loadMetrics} className="px-3 py-1 rounded bg-emerald-600 text-white">Load metrics</button>
+        <button onClick={loadSimstats} className="px-3 py-1 rounded bg-purple-700 text-white">Load simstats</button>
       </div>
 
       {msg && <div className="text-sm text-gray-700">{msg}</div>}
@@ -132,6 +156,43 @@ export default function RunsPage() {
         </div>
       )}
 
+      {simstats && (
+        <div className="space-y-3">
+          <div className="font-medium">Sim outcomes (N={simstats.n_sims}, field≈{simstats.field_size})</div>
+          <div className="overflow-auto border rounded">
+            <table className="min-w-full text-sm">
+              <thead className="bg-purple-50">
+                <tr>
+                  <th className="text-left p-2">Lineup ID</th>
+                  <th className="text-left p-2">Mean</th>
+                  <th className="text-left p-2">StDev</th>
+                  <th className="text-left p-2">Top 50%</th>
+                  <th className="text-left p-2">Top 10%</th>
+                  <th className="text-left p-2">Top 1%</th>
+                </tr>
+              </thead>
+              <tbody>
+                {simstats.lineups
+                  .slice()
+                  .sort((a,b) => b.top10_rate - a.top10_rate) // sort by top10_rate desc
+                  .slice(0, 15)
+                  .map(m => (
+                    <tr key={m.lineup_id} className="border-t">
+                      <td className="p-2 font-mono">{m.lineup_id}</td>
+                      <td className="p-2">{m.mean.toFixed(2)}</td>
+                      <td className="p-2">{m.stdev.toFixed(2)}</td>
+                      <td className="p-2">{(m.top50_rate*100).toFixed(1)}%</td>
+                      <td className="p-2">{(m.top10_rate*100).toFixed(1)}%</td>
+                      <td className="p-2">{(m.top1_rate*100).toFixed(2)}%</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="text-xs text-gray-600">Sorted by Top 10% rate. Use the API for full results.</div>
+        </div>
+      )}
+
       {lineups.length > 0 && (
         <div className="space-y-2">
           <div className="font-medium">Sample lineups (first 10)</div>
@@ -161,6 +222,7 @@ export default function RunsPage() {
           </div>
         </div>
       )}
+
     </main>
   );
 }
