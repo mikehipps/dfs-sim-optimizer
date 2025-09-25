@@ -231,7 +231,7 @@ const [runId, setRunId] = useState("");
                     <td className="p-2">{ln.salary}</td>
                     <td className="p-2">{ln.proj.toFixed(2)}</td>
                     <td className="p-2">
-                      {ln.players.slice(0,5).map(p => `${p.name}(${p.pos}-${p.team})`).join(" | ")}
+                      {ln.players.slice(0,5).map((p: any) => `${p.name}(${p.pos}-${p.team})`).join(" | ")}
                     </td>
                   </tr>
                 ))}
